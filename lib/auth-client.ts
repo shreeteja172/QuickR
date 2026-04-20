@@ -9,9 +9,10 @@ type GoogleIdTokenPayload = {
   accessToken?: string;
 };
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(callbackURL?: string) {
   return authClient.signIn.social({
     provider: "google",
+    callbackURL,
   });
 }
 
