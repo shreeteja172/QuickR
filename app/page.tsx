@@ -1,15 +1,6 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 
 export default function Page() {
-  const [isRedirecting, setIsRedirecting] = useState(false);
-
-  const handleGoogleLogin = () => {
-    setIsRedirecting(true);
-    window.location.assign("/api/auth/signin/google");
-  };
-
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[linear-gradient(130deg,#f2f8ff_0%,#ffffff_55%,#f4fff5_100%)] px-4 py-12">
       <div className="pointer-events-none absolute -left-28 top-6 h-56 w-56 rounded-full bg-blue-200/45 blur-3xl" />
@@ -20,19 +11,17 @@ export default function Page() {
           Quickr
         </p>
         <h1 className="text-3xl font-semibold text-slate-900">
-          Sign in to continue
+          Build faster with Quickr
         </h1>
         <p className="mt-3 text-sm leading-6 text-slate-600">
-          Use your Google account to securely access your workspace.
+          Your OAuth settings are ready. Continue to the sign-in page to
+          authenticate with Google.
         </p>
 
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          disabled={isRedirecting}
-          aria-busy={isRedirecting}
+        <Link
+          href="/api/signin"
           className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-400 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
-          aria-label="Continue with Google"
+          aria-label="Open sign in page"
         >
           <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5">
             <path
@@ -40,11 +29,11 @@ export default function Page() {
               d="M12 10.2v3.9h5.4c-.2 1.2-1.4 3.6-5.4 3.6a6 6 0 1 1 0-12c2.3 0 3.9 1 4.8 1.8l3.3-3.2C18.1 2.4 15.3 1.3 12 1.3a10.7 10.7 0 1 0 0 21.4c6.1 0 10.1-4.3 10.1-10.4 0-.7-.1-1.3-.2-2H12Z"
             />
           </svg>
-          {isRedirecting ? "Redirecting..." : "Continue with Google"}
-        </button>
+          Open Sign In
+        </Link>
 
         <p className="mt-5 text-xs text-slate-500">
-          By continuing, you agree to the Terms of Service and Privacy Policy.
+          Google OAuth callback should point to /api/auth/callback/google.
         </p>
       </section>
     </main>

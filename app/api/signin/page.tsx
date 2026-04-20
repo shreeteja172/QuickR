@@ -7,6 +7,7 @@ export default function SignInPage() {
     console.log("Google button clicked");
     await signIn.social({
       provider: "google",
+      callbackURL: "/dashboard",
     });
   };
 
