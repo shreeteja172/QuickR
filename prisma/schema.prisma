@@ -1,7 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client"
@@ -13,72 +14,83 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  name          String?
-  email         String   @unique
-  emailVerified Boolean  @default(false)   
-  image         String?
+      id            String    @id @unique @default(uuid())
+      email         String    @unique
+      name          String?
+      image         String?
+      emailVerified Boolean   @default(false)
+      
+      
+      isPro         Boolean   @default(false)
+      
+      createdAt     DateTime  @default(now())
+      updatedAt     DateTime  @updatedAt
+      
+      sessions      Session[]
+      accounts      Account[]
+      links         Link[]
+      
+      @@map("user")
+    }
 
-  accounts  Account[]
-  sessions  Session[]
-  links     Link[]
 
-  isPro     Boolean  @default(false)
+    model Session {
+      id        String   @id @default(cuid())
+      expiresAt DateTime
+      token     String   @unique
+      createdAt DateTime @default(now())
+      updatedAt DateTime @updatedAt
+      ipAddress String?
+      userAgent String?
+      userId    String
+      user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+      @@map("session")
+    }
 
-model Account {
-  id                String  @id @default(cuid())
+    model Account {
+      id                   String    @id @default(cuid())
+      accountId            String?
+      providerId           String?
+      userId               String
+      user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+      type                 String    @default("oauth")
+      provider             String?
+      providerAccountId    String?
+      accessToken          String?
+      refreshToken         String?
+      idToken              String?
+      accessTokenExpiresAt DateTime?
+      refreshTokenExpiresAt DateTime?
+      tokenType            String?
+      scope                String?
+      password             String?
+      createdAt            DateTime  @default(now())
+      updatedAt            DateTime  @updatedAt
 
-  accountId         String?
-  providerId        String?
+      @@unique([accountId, providerId])
+      @@map("account")
+    }
 
-  userId            String
+    model Verification {
+      id         String    @id @default(cuid())
+      identifier String
+      value      String
+      expiresAt  DateTime
+      createdAt  DateTime  @default(now())
+      updatedAt  DateTime  @updatedAt
 
-  type              String   
-  provider          String
-  providerAccountId String
+      @@map("verification")
+    }
 
-  accessToken       String?
-  refreshToken      String?
-  expiresAt         Int?
-  tokenType         String?
-  scope             String?
-  idToken           String?
+    model Link {
+      id          String   @id @default(cuid())
+      code        String   @unique
+      destination String
+      userId      String
+      user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+      createdAt   DateTime @default(now())
+      updatedAt   DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(uuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id])
-}
-
-model Verification {
-  id         String   @id @default(cuid())
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-}
-
-model Link {
-  id          String   @id @default(uuid())
-  code        String   @unique
-  destination String
-
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
+      @@map("link")
+    }
