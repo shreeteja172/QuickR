@@ -29,7 +29,7 @@ model User {
       sessions      Session[]
       accounts      Account[]
       links         Link[]
-      
+      qrCodes QRCode[]
       @@map("user")
     }
 
@@ -94,3 +94,13 @@ model User {
 
       @@map("link")
     }
+
+   
+model QRCode {
+  id        String   @id @default(cuid())
+  data      String   
+  image     String 
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
