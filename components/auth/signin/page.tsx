@@ -21,8 +21,12 @@ export default function SignInPage() {
       }
 
       setIsLoading(false);
-    } catch {
-      setAuthError("Unable to continue with Google. Please try again.");
+    } catch (error) {
+      if (error instanceof Error && error.message) {
+        setAuthError(error.message);
+      } else {
+        setAuthError("Unable to continue with Google. Please try again.");
+      }
       setIsLoading(false);
     }
   };

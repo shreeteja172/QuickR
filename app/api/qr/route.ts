@@ -12,7 +12,11 @@ function normalizeDestinationUrl(input: string): string | null {
     if (parsed.protocol === "http:" || parsed.protocol === "https:") {
       return parsed.href;
     }
-  } catch {}
+  } catch (error) {
+    if (!(error instanceof TypeError)) {
+      return null;
+    }
+  }
 
   try {
     const parsedWithHttps = new URL(`https://${trimmed}`);
@@ -22,7 +26,10 @@ function normalizeDestinationUrl(input: string): string | null {
     ) {
       return parsedWithHttps.href;
     }
-  } catch {
+  } catch (error) {
+    if (!(error instanceof TypeError)) {
+      return null;
+    }
     return null;
   }
 
@@ -92,7 +99,7 @@ export async function POST(req: Request) {
   const baseUrl = configuredAppUrl
     ? configuredAppUrl.replace(/\/+$/, "")
     : origin;
-  const qrUrl = `${baseUrl}/api/scan/${qr.id}`;
+  const qrUrl = `${baseUrl}/api/r/${qr.id}`;
   const qrImage = await QRCode.toDataURL(qrUrl);
 
   const updatedQr = await prisma.qRCode.update({

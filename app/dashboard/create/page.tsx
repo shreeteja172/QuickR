@@ -9,10 +9,16 @@ import QRForm from "@/components/qr/QRForm";
 import QRPreview from "@/components/qr/QRPreview";
 import QRStats from "@/components/qr/QRStats";
 
+type QRItem = {
+  id: string;
+  data: string;
+  image: string;
+};
+
 export default function Page() {
   const [text, setText] = useState("");
   const [qr, setQr] = useState("");
-  const [result, setResult] = useState<any[]>([]);
+  const [result, setResult] = useState<QRItem[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,14 +32,23 @@ export default function Page() {
       setIsGenerating(true);
       setError("");
 
-      const res = await axios.post("/api/qrcodes", {
+      const res = await axios.post("/api/qr", {
         data: text,
       });
 
       setQr(res.data.image);
       setResult((prev) => [res.data, ...prev]);
-    } catch {
-      setError("Error generating QR");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response?.data as { error?: string } | undefined)?.error ??
+          error.message;
+        setError(message || "Error generating QR");
+      } else if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Error generating QR");
+      }
     } finally {
       setIsGenerating(false);
     }

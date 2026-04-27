@@ -64,7 +64,7 @@ export default function Page() {
           </p>
 
           <Link
-            href="/api/signin"
+            href="/signin"
             className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-400 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
             aria-label="Open sign in page"
           >

@@ -10,8 +10,10 @@ function normalizeDestinationUrl(input: string): string | null {
     if (parsed.protocol === "http:" || parsed.protocol === "https:") {
       return parsed.href;
     }
-  } catch {
-    
+  } catch (error) {
+    if (!(error instanceof TypeError)) {
+      return null;
+    }
   }
 
   try {
@@ -22,7 +24,10 @@ function normalizeDestinationUrl(input: string): string | null {
     ) {
       return parsedWithHttps.href;
     }
-  } catch {
+  } catch (error) {
+    if (!(error instanceof TypeError)) {
+      return null;
+    }
     return null;
   }
 

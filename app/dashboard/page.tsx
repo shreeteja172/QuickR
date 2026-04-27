@@ -46,10 +46,18 @@ export default function DashboardPage() {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/dashboard/new"
+              href="/dashboard/create"
               className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
             >
               Open QR Generator
+            </Link>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/dashboard/qr"
+              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+            >
+              Open QR History
             </Link>
           </div>
         </article>

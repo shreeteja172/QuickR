@@ -16,7 +16,7 @@ export default function QRDetail() {
   const { data, isLoading } = useQuery({
     queryKey: ["qr", id],
     queryFn: async () => {
-      const res = await axios.get(`/api/qrcodes/${id}`);
+      const res = await axios.get(`/api/qr/${id}`);
       return res.data;
     },
     enabled: !!id,
@@ -24,7 +24,7 @@ export default function QRDetail() {
 
   const mutation = useMutation({
     mutationFn: async (newlink: string) => {
-      const res = await axios.put(`/api/qrcodes/${id}`, {
+      const res = await axios.put(`/api/qr/${id}`, {
         link: newlink,
       });
       return res.data;

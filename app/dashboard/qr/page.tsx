@@ -7,7 +7,7 @@ import Link from "next/link";
 const page = () => {
   const [resu, setResu] = useState<any[]>([]);
   const fetchqr = async () => {
-    const res = await axios.get("/api/qrcodes");
+    const res = await axios.get("/api/qr");
     setResu(res.data);
   };
 
@@ -19,7 +19,7 @@ const page = () => {
     <div>
       <div>
         {resu.map((qr) => (
-          <Link key={qr.id} href={`/dashboard/history/${qr.id}`}>
+          <Link key={qr.id} href={`/dashboard/qr/${qr.id}`}>
             <div className="border p-3 cursor-pointer">
               <Image
                 src={qr.image}
