@@ -12,8 +12,7 @@ function normalizeDestinationUrl(input: string): string | null {
     if (parsed.protocol === "http:" || parsed.protocol === "https:") {
       return parsed.href;
     }
-  } catch {
-  }
+  } catch {}
 
   try {
     const parsedWithHttps = new URL(`https://${trimmed}`);
@@ -44,7 +43,14 @@ export async function GET() {
   if (!user) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
-  const allqr = await prisma.qRCode.findMany();
+  const allqr = await prisma.qRCode.findMany({
+    where: {
+      userId: user.id,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   return Response.json(allqr);
 }
