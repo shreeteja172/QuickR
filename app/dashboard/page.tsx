@@ -6,8 +6,8 @@ export default function DashboardPage() {
       <div className="pointer-events-none absolute -left-28 -top-16 h-72 w-72 rounded-full bg-cyan-200/45 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-20 -right-24 h-80 w-80 rounded-full bg-lime-200/40 blur-3xl" />
 
-      <section className="relative mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <article className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+      <section className="relative mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <article className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             Quickr Dashboard
           </p>
@@ -16,7 +16,7 @@ export default function DashboardPage() {
           </h1>
           <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">
             Open the QR generator when you are ready to build a code. The
-            dashboard stays focused on navigation and overview.
+            dashboard keeps your most common actions close at hand.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -47,35 +47,39 @@ export default function DashboardPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/dashboard/create"
-              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
             >
               Open QR Generator
             </Link>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/dashboard/qr"
-              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-md"
             >
               Open QR History
             </Link>
           </div>
         </article>
 
-        <aside className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+        <aside className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <p className="text-sm font-semibold text-slate-700">Quick Actions</p>
 
           <div className="mt-4 space-y-3">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
               <p className="text-xs text-slate-500">Primary action</p>
               <p className="mt-1 text-base font-semibold text-slate-900">
-                Go to QR generation
+                Generate a new QR code
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
               <p className="text-xs text-slate-500">Best for</p>
               <p className="mt-1 text-base font-semibold text-slate-900">
                 Links, menus, campaigns
+              </p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+              <p className="text-xs text-slate-500">Recent route</p>
+              <p className="mt-1 text-base font-semibold text-slate-900">
+                /dashboard/qr/[id]
               </p>
             </div>
           </div>

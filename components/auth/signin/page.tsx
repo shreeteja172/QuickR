@@ -2,6 +2,7 @@
 
 import { signInWithGoogle } from "@/lib/auth-client";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,22 +11,31 @@ export default function SignInPage() {
   const handleGoogleLogin = async () => {
     setAuthError("");
     setIsLoading(true);
+    toast.loading("Redirecting to Google...", { id: "signin" });
 
     try {
       const result = await signInWithGoogle("/dashboard");
 
       if (result?.error) {
         setAuthError(result.error.message || "Unable to continue with Google.");
+        toast.error(result.error.message || "Unable to continue with Google.", {
+          id: "signin",
+        });
         setIsLoading(false);
         return;
       }
 
+      toast.success("Signed in successfully.", { id: "signin" });
       setIsLoading(false);
     } catch (error) {
       if (error instanceof Error && error.message) {
         setAuthError(error.message);
+        toast.error(error.message, { id: "signin" });
       } else {
         setAuthError("Unable to continue with Google. Please try again.");
+        toast.error("Unable to continue with Google. Please try again.", {
+          id: "signin",
+        });
       }
       setIsLoading(false);
     }
@@ -37,7 +47,7 @@ export default function SignInPage() {
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/40 blur-3xl" />
 
       <section className="relative mx-auto grid min-h-[85vh] w-full max-w-5xl items-center gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <article className="rounded-3xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_35px_90px_-50px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-10">
+        <article className="rounded-4xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_35px_90px_-50px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-10">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
             Quickr Access
           </p>
@@ -64,7 +74,7 @@ export default function SignInPage() {
           </div>
         </article>
 
-        <aside className="rounded-3xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_30px_80px_-55px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-8">
+        <aside className="rounded-4xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_30px_80px_-55px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-8">
           <p className="text-sm font-semibold text-slate-700">
             Continue to Quickr
           </p>

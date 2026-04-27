@@ -6,8 +6,8 @@ export default function Page() {
       <div className="pointer-events-none absolute -left-24 -top-20 h-72 w-72 rounded-full bg-cyan-200/45 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-emerald-200/45 blur-3xl" />
 
-      <section className="relative mx-auto grid w-full max-w-6xl items-center gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <article className="rounded-3xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_35px_90px_-50px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-10">
+      <section className="relative mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <article className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-7 shadow-[0_35px_90px_-50px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-10">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
             Quickr Platform
           </p>
@@ -17,9 +17,8 @@ export default function Page() {
             track every scan
           </h1>
           <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
-            Build beautiful QR experiences for events, products, and in-store
-            journeys. Sign in with Google and go straight to your dashboard in
-            seconds.
+            Build polished QR experiences for events, products, and in-store
+            journeys. Sign in with Google and move straight into your workspace.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
@@ -27,10 +26,10 @@ export default function Page() {
               Instant Google OAuth
             </span>
             <span className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700">
-              Real-time QR analytics
+              Scan analytics
             </span>
             <span className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700">
-              PNG and SVG export
+              PNG export
             </span>
           </div>
 
@@ -52,7 +51,7 @@ export default function Page() {
           </div>
         </article>
 
-        <aside className="rounded-3xl border border-slate-200/80 bg-white/90 p-7 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-8">
+        <aside className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-7 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.55)] backdrop-blur-sm sm:p-8">
           <p className="text-sm font-semibold text-slate-700">
             Ready to continue?
           </p>
@@ -65,7 +64,7 @@ export default function Page() {
 
           <Link
             href="/signin"
-            className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-400 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
+            className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
             aria-label="Open sign in page"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5">

@@ -9,7 +9,8 @@ export default function QRHeader() {
           Generate polished QR codes in seconds
         </h1>
         <p className="mt-3 max-w-xl text-sm text-slate-600">
-          Turn links and text into clean QR codes.
+          Turn links and text into clean QR codes with fast previews, safe URL
+          validation, and instant toast feedback.
         </p>
       </div>
 
