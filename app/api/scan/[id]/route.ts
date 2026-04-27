@@ -11,6 +11,7 @@ function normalizeDestinationUrl(input: string): string | null {
       return parsed.href;
     }
   } catch {
+    
   }
 
   try {
@@ -34,51 +35,21 @@ export async function GET(
 ) {
   const { id } = await context.params;
 
-  if (!id) {
-    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
-  }
-
   const qr = await prisma.qRCode.findUnique({
-    where: {
-      id: id,
-    },
+    where: { id },
   });
 
   if (!qr) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  return NextResponse.json(qr);
-}
-
-export async function PUT(
-  req: Request,
-  context: { params: Promise<{ id: string }> },
-) {
-  const { id } = await context.params;
-
-  if (!id) {
-    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
-  }
-
-  const { link } = await req.json();
-  const destinationUrl = normalizeDestinationUrl(link ?? "");
-
+  const destinationUrl = normalizeDestinationUrl(qr.data);
   if (!destinationUrl) {
     return NextResponse.json(
-      { error: "Valid URL is required" },
+      { error: "Invalid destination URL" },
       { status: 400 },
     );
   }
 
-  try {
-    const updated = await prisma.qRCode.update({
-      where: { id },
-      data: { data: destinationUrl },
-    });
-
-    return NextResponse.json({ success: true, data: updated });
-  } catch {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
+  return NextResponse.redirect(destinationUrl);
 }

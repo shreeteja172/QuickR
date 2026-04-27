@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
-import QRCode from "qrcode";
 import axios from "axios";
 import Image from "next/image";
 
@@ -28,16 +26,13 @@ export default function Page() {
       setIsGenerating(true);
       setError("");
 
-      const image = await QRCode.toDataURL(text);
-      setQr(image);
-
       const res = await axios.post("/api/qrcodes", {
         data: text,
-        image: image,
       });
 
+      setQr(res.data.image);
       setResult((prev) => [res.data, ...prev]);
-    } catch (err) {
+    } catch {
       setError("Error generating QR");
     } finally {
       setIsGenerating(false);

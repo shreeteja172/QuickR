@@ -1,47 +1,98 @@
 import prisma from "@/lib/db";
-import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { currentSession } from "@/lib/current-session";
+import QRCode from "qrcode";
 
-export async function GET(req: Request) {
-    const session = await currentSession();
-    const email = session?.user?.email;
-    if (!email) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+function normalizeDestinationUrl(input: string): string | null {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+      return parsed.href;
     }
-    const user = await prisma.user.findUnique({
-        where:{
-            email: email
-        },
-    });
-    if (!user) {
-        return NextResponse.json({ error: "User not found" }, { status: 404 });
+  } catch {
+  }
+
+  try {
+    const parsedWithHttps = new URL(`https://${trimmed}`);
+    if (
+      parsedWithHttps.protocol === "http:" ||
+      parsedWithHttps.protocol === "https:"
+    ) {
+      return parsedWithHttps.href;
     }
-    const allqr = await prisma.qRCode.findMany();
-    
-    return Response.json(allqr);
+  } catch {
+    return null;
+  }
+
+  return null;
 }
 
-export async function POST(req:Request){
-    const session = await currentSession();
-    const email = session?.user?.email;
-    if (!email) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    const {data,image} = await req.json();
+export async function GET() {
+  const session = await currentSession();
+  const email = session?.user?.email;
+  if (!email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+  const allqr = await prisma.qRCode.findMany();
 
-    const user = await prisma.user.findUnique({
-        where:{
-            email: email
-        },
-    });
-    if (!user) {
-        return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-    const qr = await prisma.qRCode.create({
-        data: {
-            data,image,userId: user.id,
-        }
-    })
-    return NextResponse.json(qr);
+  return Response.json(allqr);
+}
+
+export async function POST(req: Request) {
+  const session = await currentSession();
+  const email = session?.user?.email;
+  if (!email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { data } = await req.json();
+  const destinationUrl = normalizeDestinationUrl(data ?? "");
+
+  if (!destinationUrl) {
+    return NextResponse.json(
+      { error: "Valid URL is required" },
+      { status: 400 },
+    );
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+  const qr = await prisma.qRCode.create({
+    data: {
+      data: destinationUrl,
+      image: "",
+      userId: user.id,
+    },
+  });
+
+  const { origin } = new URL(req.url);
+  const configuredAppUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  const baseUrl = configuredAppUrl
+    ? configuredAppUrl.replace(/\/+$/, "")
+    : origin;
+  const qrUrl = `${baseUrl}/api/scan/${qr.id}`;
+  const qrImage = await QRCode.toDataURL(qrUrl);
+
+  const updatedQr = await prisma.qRCode.update({
+    where: { id: qr.id },
+    data: { image: qrImage },
+  });
+
+  return NextResponse.json(updatedQr);
 }
