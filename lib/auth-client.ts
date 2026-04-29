@@ -1,4 +1,5 @@
 import { createAuthClient } from "better-auth/react";
+import axios from "axios";
 
 export const authClient = createAuthClient();
 
@@ -21,4 +22,55 @@ export async function signInWithGoogleIdToken(idToken: GoogleIdTokenPayload) {
     provider: "google",
     idToken,
   });
+}
+
+type SignUpEmailInput = {
+  name: string;
+  email: string;
+  password: string;
+  callbackURL?: string;
+};
+
+export async function signUpWithEmail(input: SignUpEmailInput) {
+  try {
+    const { data } = await axios.post("/api/register", {
+      name: input.name,
+      email: input.email,
+      password: input.password,
+    });
+
+    return data;
+  } catch (err) {
+    const message =
+      axios.isAxiosError(err) && err.response?.data?.error
+        ? err.response.data.error
+        : err instanceof Error
+          ? err.message
+          : String(err);
+    throw new Error(message || "Failed to register");
+  }
+}
+
+type SignInEmailInput = {
+  email: string;
+  password: string;
+};
+
+export async function signInWithEmail(input: SignInEmailInput) {
+  try {
+    const { data } = await axios.post("/api/login", {
+      email: input.email,
+      password: input.password,
+    });
+
+    return data;
+  } catch (err) {
+    const message =
+      axios.isAxiosError(err) && err.response?.data?.error
+        ? err.response.data.error
+        : err instanceof Error
+          ? err.message
+          : String(err);
+    throw new Error(message || "Failed to sign in");
+  }
 }

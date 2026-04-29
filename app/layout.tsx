@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QuickR — Fast & Simple QR Code Generator",
+  title: "QuickR — QR Code Generator",
   description:
-    "Create, customize, and save QR codes instantly. Clean, fast, and built for everyday use.",
+    "Generate and manage QR codes without friction. Save, download, and revisit codes in one clean workspace.",
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-white text-slate-950">
         <Providers>{children}</Providers>
       </body>
     </html>

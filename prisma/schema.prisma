@@ -19,7 +19,7 @@ model User {
       name          String?
       image         String?
       emailVerified Boolean   @default(false)
-      
+      password     String?
       
       isPro         Boolean   @default(false)
       
@@ -33,6 +33,12 @@ model User {
       @@map("user")
     }
 
+    model Otp {
+      id        String   @id @default(cuid())
+      email     String
+      otp       String
+      expiresAt DateTime
+    }
 
     model Session {
       id        String   @id @default(cuid())

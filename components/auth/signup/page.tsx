@@ -6,12 +6,19 @@ import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-import { signInWithGoogle, signInWithEmail } from "@/lib/auth-client";
+import { signInWithGoogle, signUpWithEmail } from "@/lib/auth-client";
 
 type FieldTouched = {
+  name: boolean;
   email: boolean;
   password: boolean;
 };
+
+function validateName(name: string) {
+  if (!name.trim()) return "Enter your name.";
+  if (name.trim().length < 2) return "Name must be at least 2 characters.";
+  return "";
+}
 
 function validateEmail(email: string) {
   if (!email.trim()) return "Enter your email address.";
@@ -21,16 +28,18 @@ function validateEmail(email: string) {
 }
 
 function validatePassword(password: string) {
-  if (!password) return "Enter your password.";
+  if (!password) return "Create a password.";
   if (password.length < 8) return "Password must be at least 8 characters.";
   return "";
 }
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fieldTouched, setFieldTouched] = useState<FieldTouched>({
+    name: false,
     email: false,
     password: false,
   });
@@ -40,11 +49,17 @@ export default function SignInPage() {
   );
   const [authError, setAuthError] = useState("");
 
-  const signInMutation = useMutation({
-    mutationFn: (input: { email: string; password: string }) =>
-      signInWithEmail(input),
+  const signUpMutation = useMutation({
+    mutationFn: (input: {
+      name: string;
+      email: string;
+      password: string;
+      callbackURL?: string;
+    }) => signUpWithEmail(input),
     onSuccess() {
-      toast.success("Signed in successfully!");
+      toast.success(
+        "Account created — check your email for a verification code",
+      );
     },
     onError(err: Error) {
       const message = err.message || String(err);
@@ -55,22 +70,24 @@ export default function SignInPage() {
 
   const errors = useMemo(
     () => ({
+      name: validateName(name),
       email: validateEmail(email),
       password: validatePassword(password),
     }),
-    [email, password],
+    [email, name, password],
   );
 
-  const hasErrors = Boolean(errors.email || errors.password);
+  const hasErrors = Boolean(errors.name || errors.email || errors.password);
   const canSubmit =
     !isSubmitting &&
+    name.trim().length >= 2 &&
     /^\S+@\S+\.\S+$/.test(email.trim()) &&
     password.length >= 8;
 
-  async function handleEmailSignIn(event: React.FormEvent<HTMLFormElement>) {
+  async function handleEmailSignup(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setAuthError("");
-    setFieldTouched({ email: true, password: true });
+    setFieldTouched({ name: true, email: true, password: true });
 
     if (hasErrors) {
       setAuthError("Fix the highlighted fields and try again.");
@@ -82,18 +99,20 @@ export default function SignInPage() {
     setActiveAction("email");
 
     try {
-      await signInMutation.mutateAsync({
+      await signUpMutation.mutateAsync({
+        name: name.trim(),
         email: email.trim(),
         password,
+        callbackURL: "/dashboard",
       });
 
-      // Redirect after successful login
-      router.replace("/dashboard");
+      localStorage.setItem("signup_email", email.trim());
+      router.replace(`/verify-otp?email=${encodeURIComponent(email.trim())}`);
     } catch (error) {
       setAuthError(
         error instanceof Error && error.message
           ? error.message
-          : "Unable to sign in right now.",
+          : "Unable to create your account right now.",
       );
     } finally {
       setIsSubmitting(false);
@@ -101,7 +120,7 @@ export default function SignInPage() {
     }
   }
 
-  async function handleGoogleSignIn() {
+  async function handleGoogleSignup() {
     setAuthError("");
     setIsSubmitting(true);
     setActiveAction("google");
@@ -136,14 +155,50 @@ export default function SignInPage() {
               QuickR
             </p>
             <h1 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-slate-950">
-              Sign in to your account
+              Create and manage QR codes in seconds
             </h1>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Access your saved QR codes, history, and preferences.
+              Sign up to save QR codes, revisit history, and download PNGs from
+              one place.
             </p>
           </div>
 
-          <form className="mt-6 space-y-4" onSubmit={handleEmailSignIn}>
+          <form className="mt-6 space-y-4" onSubmit={handleEmailSignup}>
+            <div>
+              <label
+                className="block text-sm font-medium text-slate-700"
+                htmlFor="name"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                autoComplete="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                onBlur={() =>
+                  setFieldTouched((current) => ({ ...current, name: true }))
+                }
+                aria-invalid={Boolean(fieldTouched.name && errors.name)}
+                aria-describedby={
+                  fieldTouched.name && errors.name ? "name-error" : undefined
+                }
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                placeholder="Your name"
+                type="text"
+              />
+              {fieldTouched.name && errors.name && (
+                <p
+                  id="name-error"
+                  className="mt-2 text-xs text-red-600"
+                  role="alert"
+                >
+                  {errors.name}
+                </p>
+              )}
+            </div>
+
             <div>
               <label
                 className="block text-sm font-medium text-slate-700"
@@ -190,7 +245,7 @@ export default function SignInPage() {
               <input
                 id="password"
                 name="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 onBlur={() =>
@@ -228,11 +283,11 @@ export default function SignInPage() {
 
             <button
               type="submit"
-              disabled={!canSubmit || signInMutation.isPending}
-              aria-busy={signInMutation.isPending}
+              disabled={!canSubmit || signUpMutation.isPending}
+              aria-busy={signUpMutation.isPending}
               className="inline-flex w-full items-center justify-center rounded-xl bg-slate-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {signInMutation.isPending ? "Signing in..." : "Continue"}
+              {signUpMutation.isPending ? "Creating account..." : "Continue"}
             </button>
           </form>
 
@@ -246,7 +301,7 @@ export default function SignInPage() {
 
           <button
             type="button"
-            onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignup}
             disabled={isSubmitting}
             aria-busy={isSubmitting && activeAction === "google"}
             className="inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
@@ -263,12 +318,12 @@ export default function SignInPage() {
           </button>
 
           <p className="mt-6 text-center text-sm text-slate-500">
-            Don&apos;t have an account?{" "}
+            Already have an account?{" "}
             <Link
-              href="/signup"
+              href="/signin"
               className="font-medium text-slate-900 hover:underline"
             >
-              Sign up
+              Sign in
             </Link>
           </p>
         </section>
