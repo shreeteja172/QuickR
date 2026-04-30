@@ -83,7 +83,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-        </aside>
+          </aside>
       </section>
     </main>
   );

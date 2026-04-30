@@ -1,4 +1,7 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
+
+import { currentSession } from "@/lib/current-session";
 
 const features = [
   {
@@ -78,7 +81,13 @@ const qrPattern = [
   [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
 ];
 
-export default function Page() {
+export default async function Page() {
+  const session = await currentSession();
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-slate-200" />

@@ -107,6 +107,7 @@ export default function SignUpPage() {
       });
 
       localStorage.setItem("signup_email", email.trim());
+      localStorage.setItem("signup_password", password);
       router.replace(`/verify-otp?email=${encodeURIComponent(email.trim())}`);
     } catch (error) {
       setAuthError(

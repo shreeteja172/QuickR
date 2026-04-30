@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import { Resend } from "resend";
 import prisma from "@/lib/db";
 
@@ -7,28 +6,19 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const { email, password, name } = await req.json();
+    const { email } = await req.json();
 
-    if (!email || !password) {
-      return NextResponse.json(
-        { error: "Email and password are required" },
-        { status: 400 },
-      );
+    if (!email) {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing) {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
       return NextResponse.json(
-        { error: "User already exists" },
-        { status: 400 },
+        { error: "No user found for that email" },
+        { status: 404 },
       );
     }
-
-    const hashed = await bcrypt.hash(password, 10);
-
-    await prisma.user.create({
-      data: { email, password: hashed, name: name || null },
-    });
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -52,27 +42,26 @@ export async function POST(req: Request) {
       from: "onboarding@resend.dev",
       to: email,
       subject: "Verify your account",
-      // ...getVerificationEmail(otp),
       html: `<h1>Your OTP is ${otp}</h1>`,
     });
 
     if (error) {
       console.error("EMAIL SEND FAILED:", error);
       return NextResponse.json(
-        {
-          error: "Failed to send verification email",
-          details: error,
-        },
+        { error: "Failed to send email", details: error },
         { status: 500 },
       );
     }
 
-    return NextResponse.json({ success: true, otpId: created.id });
+    return NextResponse.json({
+      success: true,
+      otpId: created.id,
+    });
   } catch (err) {
-    console.error("Registration error:", err);
+    console.error("Resend OTP error:", err);
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { error: message || "Registration failed" },
+      { error: message || "Failed to resend OTP" },
       { status: 500 },
     );
   }
