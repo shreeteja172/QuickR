@@ -14,6 +14,7 @@ export default function QRDetail() {
   const params = useParams();
   const id = params?.id as string;
   const [newlink, setNewlink] = useState("");
+  const [downloading, setDownloading] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["qr", id],
@@ -23,6 +24,38 @@ export default function QRDetail() {
     },
     enabled: !!id,
   });
+
+  const downloadQRImage = async () => {
+    if (!data?.image) {
+      toast.error("QR image not available");
+      return;
+    }
+
+    setDownloading(true);
+    try {
+      const response = await fetch(data.image);
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `qr-${id}.png`;
+
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+
+      toast.success("QR code downloaded");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to download QR code");
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   const mutation = useMutation({
     mutationFn: async (newlink: string) => {
@@ -48,7 +81,7 @@ export default function QRDetail() {
   if (isLoading) {
     return (
       <main className="min-h-screen bg-[radial-gradient(circle_at_10%_10%,#eefbff_0%,#f8fbff_42%,#ffffff_100%)] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-        <div className="mx-auto flex min-h-[60vh] max-w-4xl items-center justify-center rounded-[2rem] border border-slate-200 bg-white/90 p-10 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)]">
+        <div className="mx-auto flex min-h-[60vh] max-w-4xl items-center justify-center rounded-4xl border border-slate-200 bg-white/90 p-10 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)]">
           <p className="text-sm text-slate-600">Loading QR details...</p>
         </div>
       </main>
@@ -58,7 +91,7 @@ export default function QRDetail() {
   if (!data) {
     return (
       <main className="min-h-screen bg-[radial-gradient(circle_at_10%_10%,#eefbff_0%,#f8fbff_42%,#ffffff_100%)] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-        <div className="mx-auto flex min-h-[60vh] max-w-4xl flex-col items-center justify-center rounded-[2rem] border border-slate-200 bg-white/90 p-10 text-center shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)]">
+        <div className="mx-auto flex min-h-[60vh] max-w-4xl flex-col items-center justify-center rounded-4xl border border-slate-200 bg-white/90 p-10 text-center shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)]">
           <p className="text-lg font-semibold text-slate-900">QR not found</p>
           <p className="mt-2 text-sm text-slate-600">
             The QR code may have been removed or the link is invalid.
@@ -81,7 +114,7 @@ export default function QRDetail() {
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/35 blur-3xl" />
 
       <section className="relative mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+        <div className="rounded-4xl border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             QR Detail
           </p>
@@ -93,7 +126,7 @@ export default function QRDetail() {
             the link when needed.
           </p>
 
-          <div className="mt-8 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4">
+          <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-4">
             <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
               Current destination
             </p>
@@ -111,7 +144,7 @@ export default function QRDetail() {
           </div>
         </div>
 
-        <div className="space-y-6 rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+        <div className="space-y-6 rounded-4xl border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <div className="flex justify-center rounded-2xl bg-slate-50 p-5">
             <Image
               src={data.image}
@@ -121,6 +154,27 @@ export default function QRDetail() {
               unoptimized
             />
           </div>
+
+          <button
+            onClick={downloadQRImage}
+            disabled={downloading}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 4v12m0 0l-4-4m4 4l4-4"
+              />
+            </svg>
+            {downloading ? "Downloading..." : "Download QR Code"}
+          </button>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -141,7 +195,7 @@ export default function QRDetail() {
             </div>
           </div>
 
-          <div className="space-y-3 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4">
+          <div className="space-y-3 rounded-3xl border border-slate-200 bg-slate-50 p-4">
             <label
               htmlFor="new-link"
               className="text-sm font-semibold text-slate-900"
