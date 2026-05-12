@@ -113,7 +113,7 @@ export default function QRDetail() {
       <div className="pointer-events-none absolute -left-24 -top-12 h-72 w-72 rounded-full bg-cyan-200/35 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/35 blur-3xl" />
 
-      <section className="relative mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="relative mx-auto grid grid-cols-1 w-full max-w-5xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-4xl border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             QR Detail
@@ -176,7 +176,7 @@ export default function QRDetail() {
             {downloading ? "Downloading..." : "Download QR Code"}
           </button>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
                 ID

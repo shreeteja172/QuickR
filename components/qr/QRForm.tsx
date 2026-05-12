@@ -17,7 +17,7 @@ export default function QRForm({
 }: Props) {
   return (
     <form
-      className="mt-8 space-y-5 rounded-[1.75rem] border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm"
+      className="mt-8 space-y-5 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm"
       onSubmit={(e) => {
         e.preventDefault();
         generateQR();

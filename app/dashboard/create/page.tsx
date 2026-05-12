@@ -70,7 +70,7 @@ export default function Page() {
       <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-cyan-200/35 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/35 blur-3xl" />
 
-      <section className="relative mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+      <section className="relative mx-auto grid grid-cols-1 w-full max-w-6xl gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div>
           <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-slate-600">
             <Link
@@ -83,7 +83,7 @@ export default function Page() {
             <span>Create QR</span>
             <Link
               href="/dashboard/qr"
-              className="ml-auto rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:shadow-sm"
+              className="ml-auto mt-3 w-full sm:w-auto rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:shadow-sm sm:mt-0"
             >
               Open history
             </Link>
@@ -104,7 +104,7 @@ export default function Page() {
           <QRPreview qr={qr} text={text} />
           <QRStats />
 
-          <div className="rounded-[1.75rem] border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm">
+          <div className="rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">

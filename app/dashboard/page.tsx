@@ -6,8 +6,8 @@ export default function DashboardPage() {
       <div className="pointer-events-none absolute -left-28 -top-16 h-72 w-72 rounded-full bg-cyan-200/45 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-20 -right-24 h-80 w-80 rounded-full bg-lime-200/40 blur-3xl" />
 
-      <section className="relative mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <article className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+      <section className="relative mx-auto grid grid-cols-1 w-full max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <article className="rounded-4xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_30px_80px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             Quickr Dashboard
           </p>
@@ -60,7 +60,7 @@ export default function DashboardPage() {
           </div>
         </article>
 
-        <aside className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+        <aside className="rounded-4xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
           <p className="text-sm font-semibold text-slate-700">Quick Actions</p>
 
           <div className="mt-4 space-y-3">
@@ -83,7 +83,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          </aside>
+        </aside>
       </section>
     </main>
   );

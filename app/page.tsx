@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Header from "@/components/layout/Header";
 
 import { currentSession } from "@/lib/current-session";
 
@@ -95,42 +96,9 @@ export default async function Page() {
       <div className="pointer-events-none absolute right-0 top-80 h-80 w-80 rounded-full bg-emerald-100/30 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8 lg:py-6">
-        <header className="flex items-center justify-between gap-4 border-b border-slate-200/80 bg-white/80 px-4 py-4 backdrop-blur-sm sm:px-5 lg:px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-900 text-sm font-semibold text-white">
-              QR
-            </span>
-            <span>
-              <span className="block text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">
-                QuickR
-              </span>
-              <span className="block text-sm text-slate-600">
-                QR Code Generator
-              </span>
-            </span>
-          </Link>
+        <Header />
 
-          <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-            <a href="#features" className="transition hover:text-slate-950">
-              Features
-            </a>
-            <a href="#how-it-works" className="transition hover:text-slate-950">
-              How it works
-            </a>
-            <a href="#use-cases" className="transition hover:text-slate-950">
-              Use cases
-            </a>
-          </nav>
-
-          <Link
-            href="/signin"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2"
-          >
-            Sign in
-          </Link>
-        </header>
-
-        <section className="grid gap-6 py-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 lg:py-10">
+        <section className="grid grid-cols-1 gap-6 py-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 lg:py-10">
           <article className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8 lg:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
               QR code generation
@@ -212,7 +180,7 @@ export default async function Page() {
                 />
               </label>
 
-              <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-[1fr_auto]">
                 <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
                   <div className="mx-auto grid aspect-square w-full max-w-68 grid-cols-13 gap-1 rounded-2xl bg-white p-4 shadow-sm">
                     {qrPattern.flatMap((row, rowIndex) =>
@@ -276,7 +244,7 @@ export default async function Page() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {features.map((feature) => (
               <article
                 key={feature.title}
@@ -298,7 +266,7 @@ export default async function Page() {
           id="how-it-works"
           className="border-t border-slate-200 py-10 sm:py-12"
         >
-          <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <div className="max-w-xl">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                 How it works
@@ -312,7 +280,7 @@ export default async function Page() {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {steps.map((step) => (
                 <article
                   key={step.number}
@@ -346,7 +314,7 @@ export default async function Page() {
             </h2>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {useCases.map((useCase) => (
               <article
                 key={useCase.title}
@@ -376,7 +344,7 @@ export default async function Page() {
 
             <Link
               href="/dashboard/create"
-              className="mt-6 inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 lg:mt-0"
+              className="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 sm:w-auto lg:mt-0"
             >
               Generate QR
             </Link>

@@ -54,8 +54,8 @@ const Page = () => {
           </button>
         </div>
 
-        <div className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
-          <div className="flex items-start justify-between gap-4">
+        <div className="rounded-4xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Saved QR codes
@@ -71,7 +71,7 @@ const Page = () => {
 
             <Link
               href="/dashboard/create"
-              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+              className="w-full inline-flex items-center justify-center sm:w-auto rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
             >
               New QR
             </Link>
@@ -79,7 +79,7 @@ const Page = () => {
 
           <div className="mt-8">
             {isLoading ? (
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {Array.from({ length: 6 }).map((_, index) => (
                   <div
                     key={index}
@@ -98,7 +98,7 @@ const Page = () => {
                 No QR codes yet. Generate one to populate this history.
               </div>
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {items.map((qr) => (
                   <Link
                     key={qr.id}

@@ -7,13 +7,20 @@ type Props = {
 
 export default function QRPreview({ qr, text }: Props) {
   return (
-    <div className="rounded-[1.75rem] border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm">
+    <div className="rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm">
       {qr ? (
         <div className="flex justify-center rounded-2xl bg-slate-50 p-4">
-          <Image src={qr} alt="QR" width={300} height={300} unoptimized />
+          <Image
+            src={qr}
+            alt="QR"
+            width={300}
+            height={300}
+            unoptimized
+            className="w-44 h-44 sm:w-72 sm:h-72"
+          />
         </div>
       ) : (
-        <div className="flex min-h-[320px] items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-8 text-center">
+        <div className="flex min-h-80 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-8 text-center">
           <div>
             <p className="text-base font-semibold text-slate-800">
               No preview yet

@@ -150,7 +150,7 @@ function VerifyOtpForm() {
               />
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -163,7 +163,7 @@ function VerifyOtpForm() {
                 type="button"
                 onClick={handleResend}
                 disabled={isResending}
-                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex flex-1 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-initial"
               >
                 {isResending ? "Resending..." : "Resend code"}
               </button>
