@@ -103,25 +103,17 @@ export default function SignInPage() {
 
   async function handleGoogleSignIn() {
     setAuthError("");
-    setIsSubmitting(true);
     setActiveAction("google");
 
     try {
-      const result = await signInWithGoogle("/dashboard");
-
-      if (result?.error) {
-        setAuthError(result.error.message || "Unable to continue with Google.");
-        return;
-      }
-
-      router.replace("/dashboard");
+      // Don't await - OAuth redirect should happen immediately
+      signInWithGoogle("/dashboard");
     } catch (error) {
       setAuthError(
         error instanceof Error && error.message
           ? error.message
           : "Unable to continue with Google.",
       );
-    } finally {
       setIsSubmitting(false);
       setActiveAction(null);
     }
