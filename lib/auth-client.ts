@@ -54,23 +54,19 @@ export async function signUpWithEmail(input: SignUpEmailInput) {
 type SignInEmailInput = {
   email: string;
   password: string;
+  callbackURL?: string;
 };
 
 export async function signInWithEmail(input: SignInEmailInput) {
-  try {
-    const { data } = await axios.post("/api/login", {
-      email: input.email,
-      password: input.password,
-    });
+  const result = await authClient.signIn.email({
+    email: input.email,
+    password: input.password,
+    callbackURL: input.callbackURL,
+  });
 
-    return data;
-  } catch (err) {
-    const message =
-      axios.isAxiosError(err) && err.response?.data?.error
-        ? err.response.data.error
-        : err instanceof Error
-          ? err.message
-          : String(err);
-    throw new Error(message || "Failed to sign in");
+  if (result.error) {
+    throw new Error(result.error.message || "Failed to sign in");
   }
+
+  return result.data;
 }

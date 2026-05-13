@@ -4,7 +4,6 @@ import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { signInWithEmail } from "@/lib/auth-client";
 
 function VerifyOtpForm() {
   const router = useRouter();
@@ -38,18 +37,6 @@ function VerifyOtpForm() {
       if (data?.success) {
         toast.success("Email verified — welcome!");
         localStorage.removeItem("signup_email");
-        const storedPw = localStorage.getItem("signup_password");
-        if (storedPw) {
-          try {
-            await signInWithEmail({ email, password: storedPw });
-            localStorage.removeItem("signup_password");
-            router.replace("/dashboard");
-            return;
-          } catch (err) {
-            console.warn("Auto sign-in failed after verification", err);
-          }
-        }
-
         router.replace("/signin?email=" + encodeURIComponent(email));
       } else {
         toast.error(data?.error || "Verification failed");

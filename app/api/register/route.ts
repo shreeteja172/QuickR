@@ -5,6 +5,17 @@ import prisma from "@/lib/db";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function genericRegisterAccepted() {
+  return NextResponse.json(
+    {
+      success: true,
+      message:
+        "If your request is valid, you will receive verification instructions shortly.",
+    },
+    { status: 200 },
+  );
+}
+
 export async function POST(req: Request) {
   try {
     const { email, password, name } = await req.json();
@@ -18,10 +29,7 @@ export async function POST(req: Request) {
 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
-      return NextResponse.json(
-        { error: "User already exists" },
-        { status: 400 },
-      );
+      return genericRegisterAccepted();
     }
 
     const hashed = await bcrypt.hash(password, 10);
@@ -32,7 +40,7 @@ export async function POST(req: Request) {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const created = await prisma.otp.create({
+    await prisma.otp.create({
       data: {
         email,
         otp,
@@ -67,7 +75,7 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, otpId: created.id });
+    return genericRegisterAccepted();
   } catch (err) {
     console.error("Registration error:", err);
     const message = err instanceof Error ? err.message : String(err);

@@ -4,7 +4,26 @@ import prisma from "@/lib/db";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function acceptedResponse() {
+  return NextResponse.json(
+    {
+      success: true,
+      message:
+        "If your request is valid, you will receive verification instructions shortly.",
+    },
+    { status: 202 },
+  );
+}
+
+async function ensureMinimumLatency(startedAt: number, minimumMs = 400) {
+  const elapsed = Date.now() - startedAt;
+  if (elapsed >= minimumMs) return;
+  await new Promise((resolve) => setTimeout(resolve, minimumMs - elapsed));
+}
+
 export async function POST(req: Request) {
+  const startedAt = Date.now();
+
   try {
     const { email } = await req.json();
 
@@ -14,15 +33,13 @@ export async function POST(req: Request) {
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      return NextResponse.json(
-        { error: "No user found for that email" },
-        { status: 404 },
-      );
+      await ensureMinimumLatency(startedAt);
+      return acceptedResponse();
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const created = await prisma.otp.create({
+    await prisma.otp.create({
       data: {
         email,
         otp,
@@ -32,10 +49,8 @@ export async function POST(req: Request) {
 
     if (!process.env.RESEND_API_KEY) {
       console.error("RESEND_API_KEY missing: cannot send verification email");
-      return NextResponse.json(
-        { error: "Server misconfigured: email service not configured" },
-        { status: 500 },
-      );
+      await ensureMinimumLatency(startedAt);
+      return acceptedResponse();
     }
 
     const { error } = await resend.emails.send({
@@ -47,22 +62,15 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error("EMAIL SEND FAILED:", error);
-      return NextResponse.json(
-        { error: "Failed to send email", details: error },
-        { status: 500 },
-      );
+      await ensureMinimumLatency(startedAt);
+      return acceptedResponse();
     }
 
-    return NextResponse.json({
-      success: true,
-      otpId: created.id,
-    });
+    await ensureMinimumLatency(startedAt);
+    return acceptedResponse();
   } catch (err) {
     console.error("Resend OTP error:", err);
-    const message = err instanceof Error ? err.message : String(err);
-    return NextResponse.json(
-      { error: message || "Failed to resend OTP" },
-      { status: 500 },
-    );
+    await ensureMinimumLatency(startedAt);
+    return acceptedResponse();
   }
 }

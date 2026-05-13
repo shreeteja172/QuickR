@@ -2,6 +2,16 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/db";
 
+const DUMMY_PASSWORD_HASH =
+  "$2b$10$w3tM6QpZ6m0z4w1VY9bA2uC0Q8fHjXvN/5r8v8W4wS3p1sI6E8nZK";
+
+function invalidCredentialsResponse() {
+  return NextResponse.json(
+    { error: "Invalid email or password" },
+    { status: 401 },
+  );
+}
+
 export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
@@ -17,29 +27,11 @@ export async function POST(req: Request) {
       where: { email },
     });
 
-    if (!user) {
-      return NextResponse.json(
-        { error: "Email address not found. Please sign up first." },
-        { status: 401 },
-      );
-    }
+    const passwordHash = user?.password ?? DUMMY_PASSWORD_HASH;
+    const isPasswordValid = await bcrypt.compare(password, passwordHash);
 
-    if (!user.password) {
-      return NextResponse.json(
-        {
-          error:
-            "This account was created with a social login. Please sign in with the same provider.",
-        },
-        { status: 401 },
-      );
-    }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      return NextResponse.json(
-        { error: "Invalid email or password" },
-        { status: 401 },
-      );
+    if (!user || !user.password || !isPasswordValid) {
+      return invalidCredentialsResponse();
     }
 
     if (!user.emailVerified) {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
@@ -28,7 +28,9 @@ function validatePassword(password: string) {
 
 export default function SignInPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const searchParams = useSearchParams();
+  const queryEmail = searchParams?.get("email") || "";
+  const [email, setEmail] = useState(queryEmail);
   const [password, setPassword] = useState("");
   const [fieldTouched, setFieldTouched] = useState<FieldTouched>({
     email: false,
@@ -41,7 +43,7 @@ export default function SignInPage() {
   const [authError, setAuthError] = useState("");
 
   const signInMutation = useMutation({
-    mutationFn: (input: { email: string; password: string }) =>
+    mutationFn: (input: { email: string; password: string; callbackURL?: string }) =>
       signInWithEmail(input),
     onSuccess() {
       toast.success("Signed in successfully!");
@@ -85,6 +87,7 @@ export default function SignInPage() {
       await signInMutation.mutateAsync({
         email: email.trim(),
         password,
+        callbackURL: "/dashboard",
       });
 
       // Redirect after successful login

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import { Prisma } from "@/lib/generated/prisma/client";
+import { currentSession } from "@/lib/current-session";
 
 function normalizeDestinationUrl(input: string): string | null {
   const trimmed = input.trim();
@@ -45,9 +45,25 @@ export async function GET(
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
   }
 
-  const qr = await prisma.qRCode.findUnique({
+  const session = await currentSession();
+  const email = session?.user?.email;
+  if (!email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { id: true },
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  const qr = await prisma.qRCode.findFirst({
     where: {
-      id: id,
+      id,
+      userId: user.id,
     },
   });
 
@@ -68,6 +84,21 @@ export async function PUT(
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
   }
 
+  const session = await currentSession();
+  const email = session?.user?.email;
+  if (!email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { id: true },
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
   const { link } = await req.json();
   const destinationUrl = normalizeDestinationUrl(link ?? "");
 
@@ -78,6 +109,18 @@ export async function PUT(
     );
   }
 
+  const existingQr = await prisma.qRCode.findFirst({
+    where: {
+      id,
+      userId: user.id,
+    },
+    select: { id: true },
+  });
+
+  if (!existingQr) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
   try {
     const updated = await prisma.qRCode.update({
       where: { id },
@@ -85,14 +128,7 @@ export async function PUT(
     });
 
     return NextResponse.json({ success: true, data: updated });
-  } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
-    }
-
+  } catch {
     return NextResponse.json(
       { error: "Failed to update QR code" },
       { status: 500 },
