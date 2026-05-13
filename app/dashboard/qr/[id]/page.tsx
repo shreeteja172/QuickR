@@ -80,9 +80,9 @@ export default function QRDetail() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-[radial-gradient(circle_at_10%_10%,#eefbff_0%,#f8fbff_42%,#ffffff_100%)] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-        <div className="mx-auto flex min-h-[60vh] max-w-4xl items-center justify-center rounded-4xl border border-slate-200 bg-white/90 p-10 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)]">
-          <p className="text-sm text-slate-600">Loading QR details...</p>
+      <main className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="flex min-h-[50vh] items-center justify-center rounded-4xl border border-slate-200 bg-white p-10 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)]">
+          <p className="text-sm font-medium text-slate-600">Loading QR details...</p>
         </div>
       </main>
     );
@@ -90,15 +90,15 @@ export default function QRDetail() {
 
   if (!data) {
     return (
-      <main className="min-h-screen bg-[radial-gradient(circle_at_10%_10%,#eefbff_0%,#f8fbff_42%,#ffffff_100%)] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-        <div className="mx-auto flex min-h-[60vh] max-w-4xl flex-col items-center justify-center rounded-4xl border border-slate-200 bg-white/90 p-10 text-center shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)]">
+      <main className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-4xl border border-slate-200 bg-white p-10 text-center shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)]">
           <p className="text-lg font-semibold text-slate-900">QR not found</p>
           <p className="mt-2 text-sm text-slate-600">
             The QR code may have been removed or the link is invalid.
           </p>
           <Link
             href="/dashboard/qr"
-            className="mt-6 inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="mt-6 inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
           >
             Back to history
           </Link>
@@ -109,25 +109,22 @@ export default function QRDetail() {
 
   const isValid = newlink.trim() !== "";
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_10%_10%,#eefbff_0%,#f8fbff_42%,#ffffff_100%)] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-      <div className="pointer-events-none absolute -left-24 -top-12 h-72 w-72 rounded-full bg-cyan-200/35 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/35 blur-3xl" />
-
-      <section className="relative mx-auto grid grid-cols-1 w-full max-w-5xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-4xl border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
+    <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8">
+        <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             QR Detail
           </p>
-          <h1 className="mt-2 text-3xl font-semibold text-slate-900 sm:text-4xl">
-            Update and inspect this code
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+            Update and inspect
           </h1>
           <p className="mt-3 text-sm leading-6 text-slate-600">
             Review the current destination, preview the QR image, and replace
             the link when needed.
           </p>
 
-          <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
+          <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
               Current destination
             </p>
             <p className="mt-2 break-all text-sm font-medium text-slate-900">
@@ -137,15 +134,15 @@ export default function QRDetail() {
               href={data.data}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:shadow-sm"
+              className="mt-4 inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 hover:shadow-sm"
             >
               Open live link
             </a>
           </div>
         </div>
 
-        <div className="space-y-6 rounded-4xl border border-slate-200 bg-white/90 p-6 shadow-[0_28px_80px_-52px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-8">
-          <div className="flex justify-center rounded-2xl bg-slate-50 p-5">
+        <div className="space-y-6 rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
+          <div className="flex justify-center rounded-3xl bg-slate-50 p-6 border border-slate-100">
             <Image
               src={data.image}
               width={240}
@@ -158,7 +155,7 @@ export default function QRDetail() {
           <button
             onClick={downloadQRImage}
             disabled={downloading}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
             <svg
               className="h-4 w-4"
@@ -178,27 +175,27 @@ export default function QRDetail() {
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 ID
               </p>
-              <p className="mt-2 break-all text-sm font-semibold text-slate-900">
+              <p className="mt-2 break-all text-sm font-medium text-slate-900">
                 {id}
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 State
               </p>
-              <p className="mt-2 text-sm font-semibold text-emerald-700">
+              <p className="mt-2 text-sm font-medium text-emerald-700">
                 Active
               </p>
             </div>
           </div>
 
-          <div className="space-y-3 rounded-3xl border border-slate-200 bg-slate-50 p-4">
+          <div className="space-y-4 rounded-3xl border border-slate-200 bg-slate-50 p-5">
             <label
               htmlFor="new-link"
-              className="text-sm font-semibold text-slate-900"
+              className="block text-sm font-semibold text-slate-900"
             >
               Replace destination
             </label>
@@ -208,12 +205,12 @@ export default function QRDetail() {
               value={newlink}
               onChange={(e) => setNewlink(e.target.value)}
               placeholder="Paste a new URL"
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:ring-4 focus:ring-slate-100"
             />
             <button
               onClick={updateData}
               disabled={!isValid || mutation.isPending}
-              className="inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-xl bg-slate-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {mutation.isPending ? "Updating..." : "Update QR"}
             </button>

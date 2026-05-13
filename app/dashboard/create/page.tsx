@@ -66,24 +66,21 @@ export default function Page() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_10%_10%,#e7f7ff_0%,#f8fbff_40%,#ffffff_100%)] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-      <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-cyan-200/35 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/35 blur-3xl" />
-
-      <section className="relative mx-auto grid grid-cols-1 w-full max-w-6xl gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+    <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">
         <div>
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-slate-600">
+          <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
             <Link
               href="/dashboard"
-              className="font-medium text-slate-900 hover:underline"
+              className="font-medium text-slate-600 hover:text-slate-950 transition"
             >
               Dashboard
             </Link>
             <span aria-hidden="true">/</span>
-            <span>Create QR</span>
+            <span className="font-medium text-slate-900">Create QR</span>
             <Link
               href="/dashboard/qr"
-              className="ml-auto mt-3 w-full sm:w-auto rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:shadow-sm sm:mt-0"
+              className="ml-auto mt-3 w-full sm:w-auto rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 sm:mt-0 shadow-sm"
             >
               Open history
             </Link>
@@ -100,18 +97,18 @@ export default function Page() {
           />
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 lg:space-y-8">
           <QRPreview qr={qr} text={text} />
           <QRStats />
 
-          <div className="rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm">
+          <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-semibold text-slate-900">
-                  Saved QRs
+                <h2 className="text-lg font-semibold text-slate-950">
+                  Recent Generations
                 </h2>
                 <p className="mt-1 text-sm text-slate-500">
-                  Recent codes stay available for quick follow-up.
+                  Codes stay available for quick follow-up.
                 </p>
               </div>
               <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
@@ -119,16 +116,16 @@ export default function Page() {
               </span>
             </div>
 
-            <div className="mt-4 space-y-3">
+            <div className="mt-6 space-y-3">
               {result.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-6 text-sm text-slate-500">
+                <div className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-8 text-center text-sm text-slate-500">
                   Nothing saved yet. Generate a QR code to see it here.
                 </div>
               ) : (
                 result.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4"
+                    className="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4"
                   >
                     <Image
                       src={item.image}
@@ -136,7 +133,7 @@ export default function Page() {
                       width={84}
                       height={84}
                       unoptimized
-                      className="rounded-xl border border-slate-200 bg-white"
+                      className="rounded-2xl border border-slate-200 bg-white shadow-sm"
                     />
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold text-slate-900">
