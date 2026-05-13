@@ -67,10 +67,7 @@ export async function POST(req: Request) {
     if (error) {
       console.error("EMAIL SEND FAILED:", error);
       return NextResponse.json(
-        {
-          error: "Failed to send verification email",
-          details: error,
-        },
+        { error: "Unable to process request" },
         { status: 500 },
       );
     }
@@ -78,9 +75,8 @@ export async function POST(req: Request) {
     return genericRegisterAccepted();
   } catch (err) {
     console.error("Registration error:", err);
-    const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { error: message || "Registration failed" },
+      { error: "Unable to process request" },
       { status: 500 },
     );
   }
