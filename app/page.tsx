@@ -96,7 +96,7 @@ export default async function Page() {
       <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[600px] w-[600px] rounded-full bg-emerald-200/20 blur-[100px] opacity-60" />
       <div className="pointer-events-none absolute left-[-10%] top-[60%] h-[600px] w-[600px] rounded-full bg-blue-200/20 blur-[100px] opacity-60" />
 
-      <div className="relative mx-auto max-w-6xl px-4 pt-24 pb-8 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32 lg:pb-14 z-10">
+      <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-8 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24 lg:pb-14 z-10">
         <Header />
 
         <section className="grid grid-cols-1 gap-8 py-4 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-14 items-center">
