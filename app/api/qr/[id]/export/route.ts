@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/db";
 import { currentSession } from "@/lib/current-session";
 import QRCode from "qrcode";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } },
+  request: NextRequest,
+  context: { params: { id: string } | Promise<{ id: string }> },
 ) {
   const session = await currentSession();
   const email = session?.user?.email;
@@ -13,7 +13,8 @@ export async function GET(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const qrId = params.id;
+  const resolvedParams = await context.params;
+  const qrId = resolvedParams.id;
   const qr = await prisma.qRCode.findUnique({ where: { id: qrId } });
   if (!qr) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -25,7 +26,7 @@ export async function GET(
   }
 
   try {
-    const { origin } = new URL(req.url);
+    const { origin } = new URL(request.url);
     const configuredAppUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
     const baseUrl = configuredAppUrl
       ? configuredAppUrl.replace(/\/+$/, "")
