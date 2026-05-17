@@ -36,18 +36,32 @@ export default function QRDetail() {
   });
 
   const downloadQRImage = async () => {
-    if (!data?.image) {
-      toast.error("QR image not available");
-      return;
-    }
-
     setDownloading(true);
     try {
+      const exportRes = await fetch(`/api/qr/${id}/export`);
+      if (exportRes.ok) {
+        const blob = await exportRes.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `qr-${id}-4k.png`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+        toast.success("QR code downloaded (4K)");
+        return;
+      }
+
+      if (!data?.image) {
+        toast.error("QR image not available");
+        return;
+      }
+
       const response = await fetch(data.image);
       const blob = await response.blob();
 
       const url = window.URL.createObjectURL(blob);
-
       const link = document.createElement("a");
       link.href = url;
       link.download = `qr-${id}.png`;
@@ -182,10 +196,6 @@ export default function QRDetail() {
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                   Current destination
                 </p>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-800">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                  Active
-                </span>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="break-all text-sm font-medium text-slate-900 bg-white border border-slate-200 py-3 px-4 rounded-xl flex-1 shadow-sm">

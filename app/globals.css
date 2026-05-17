@@ -35,6 +35,10 @@ select {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 html {
   scroll-behavior: smooth;
 }

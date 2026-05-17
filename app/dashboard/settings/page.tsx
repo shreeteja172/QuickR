@@ -10,16 +10,22 @@ import axios from "axios";
 export default function SettingsPage() {
   const { data: session, isPending } = useSession();
   const [saving, setSaving] = useState(false);
+  const [name, setName] = useState(session?.user?.name || "");
   const [deleting, setDeleting] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const router = useRouter();
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setSaving(true);
-    setTimeout(() => {
-      setSaving(false);
+    try {
+      await axios.patch("/api/user", { name });
       toast.success("Settings updated successfully.");
-    }, 800);
+      router.refresh();
+    } catch (error) {
+      toast.error("Failed to save settings. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleDeleteAccount = async () => {
@@ -78,8 +84,9 @@ export default function SettingsPage() {
               </label>
               <input
                 type="text"
-                defaultValue={session?.user?.name || ""}
-                disabled={isPending}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={isPending || saving}
                 placeholder="Your name"
                 className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:ring-4 focus:ring-slate-100"
               />

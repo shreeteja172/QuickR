@@ -13,10 +13,6 @@ export default function QRHeader() {
           validation, and instant toast feedback.
         </p>
       </div>
-
-      <span className="rounded-full border border-emerald-300 bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-        Live Preview
-      </span>
     </div>
   );
 }

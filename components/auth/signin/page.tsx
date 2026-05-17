@@ -133,7 +133,7 @@ export default function SignInPage() {
         <div className="mx-auto min-h-[calc(100vh-4rem)] w-full max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="p-6 sm:p-12">
-              <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 via-cyan-700 to-emerald-500 text-white p-8 shadow-lg">
+              <div className="rounded-2xl overflow-hidden bg-linear-to-br from-slate-800 via-cyan-700 to-emerald-500 text-white p-8 shadow-lg">
                 <div className="flex items-center gap-4">
                   <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-white/10">
                     <span className="font-bold">QR</span>

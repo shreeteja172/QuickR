@@ -146,7 +146,7 @@ export default function SignUpPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="flex flex-col justify-center gap-6 p-6 sm:p-12">
               <div className="order-1 lg:order-1 p-6 sm:p-12">
-                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-cyan-600 to-emerald-400 text-white p-8 shadow-lg">
+                <div className="rounded-2xl overflow-hidden bg-linear-to-br from-cyan-600 to-emerald-400 text-white p-8 shadow-lg">
                   <div className="flex items-center gap-4">
                     <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-white/20">
                       <span className="font-bold">QR</span>
@@ -241,7 +241,7 @@ export default function SignUpPage() {
                       Create account
                     </p>
                     <h4 className="mt-1 text-xl font-semibold text-slate-900">
-                      Get started — it's free
+                      Get started — it&apos;s free
                     </h4>
                   </div>
                 </div>
