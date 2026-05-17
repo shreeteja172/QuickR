@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useSession, signOut } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { data: session, isPending } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
+  const hideAuthCTA = pathname === "/signup" || pathname === "/signin";
 
   const handleSignOut = async () => {
     await signOut();
@@ -19,7 +21,10 @@ export default function Header() {
     <header className="fixed inset-x-0 top-4 z-50 mx-auto w-full max-w-6xl px-4 sm:px-6">
       <div className="relative rounded-2xl border border-slate-200/80 bg-white/85 px-4 py-3 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.2)] backdrop-blur-md">
         <div className="flex items-center justify-between gap-4">
-          <Link href={session ? "/dashboard" : "/"} className="flex items-center gap-3">
+          <Link
+            href={session ? "/dashboard" : "/"}
+            className="flex items-center gap-3"
+          >
             <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-slate-950 text-sm font-semibold text-white">
               QR
             </span>
@@ -119,12 +124,14 @@ export default function Header() {
                 </button>
               </div>
             ) : (
-              <Link
-                href="/signin"
-                className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-2 text-sm font-medium text-white transition hover:bg-slate-800 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-              >
-                Sign in
-              </Link>
+              !hideAuthCTA && (
+                <Link
+                  href="/signin"
+                  className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-2 text-sm font-medium text-white transition hover:bg-slate-800 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                >
+                  Sign in
+                </Link>
+              )
             )}
           </nav>
         </div>
