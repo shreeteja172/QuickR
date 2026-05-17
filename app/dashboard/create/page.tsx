@@ -3,7 +3,6 @@
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -69,23 +68,6 @@ export default function Page() {
     <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">
         <div>
-          <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-            <Link
-              href="/dashboard"
-              className="font-medium text-slate-600 hover:text-slate-950 transition"
-            >
-              Dashboard
-            </Link>
-            <span aria-hidden="true">/</span>
-            <span className="font-medium text-slate-900">Create QR</span>
-            <Link
-              href="/dashboard/qr"
-              className="ml-auto mt-3 w-full sm:w-auto rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 sm:mt-0 shadow-sm"
-            >
-              Open history
-            </Link>
-          </div>
-
           <QRHeader />
           <QRForm
             text={text}

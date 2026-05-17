@@ -25,32 +25,8 @@ const Page = () => {
   const items = data ?? [];
 
   return (
-    <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <main className="relative mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <section className="relative w-full">
-        <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-          <Link
-            href="/dashboard"
-            className="font-medium text-slate-600 hover:text-slate-950 transition"
-          >
-            Dashboard
-          </Link>
-          <span aria-hidden="true">/</span>
-          <span className="font-medium text-slate-900">QR History</span>
-          <button
-            type="button"
-            onClick={() => {
-              toast.promise(refetch(), {
-                loading: "Refreshing history...",
-                success: "History updated.",
-                error: "Failed to refresh history.",
-              });
-            }}
-            className="ml-auto rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 shadow-sm"
-          >
-            Refresh
-          </button>
-        </div>
-
         <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
           <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
             <div>
@@ -71,8 +47,18 @@ const Page = () => {
               className="w-full inline-flex shrink-0 items-center justify-center sm:w-auto rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2"
             >
               New QR
-              <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              <svg
+                className="ml-2 h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
               </svg>
             </Link>
           </div>

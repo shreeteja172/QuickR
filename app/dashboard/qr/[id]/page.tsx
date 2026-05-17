@@ -163,26 +163,6 @@ export default function QRDetail() {
 
   return (
     <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-        <Link
-          href="/dashboard"
-          className="font-medium text-slate-600 hover:text-slate-950 transition"
-        >
-          Dashboard
-        </Link>
-        <span aria-hidden="true">/</span>
-        <Link
-          href="/dashboard/qr"
-          className="font-medium text-slate-600 hover:text-slate-950 transition"
-        >
-          QR History
-        </Link>
-        <span aria-hidden="true">/</span>
-        <span className="font-medium text-slate-900 truncate max-w-[200px] sm:max-w-none">
-          {id}
-        </span>
-      </div>
-
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
         <div className="flex flex-col gap-6">
           <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">

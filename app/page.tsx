@@ -6,7 +6,12 @@ import { currentSession } from "@/lib/current-session";
 
 const features = [
   {
-    title: "Generate QR from text or links",
+    title: "Dynamic / Updatable QR codes",
+    description:
+      "Create QR codes whose destination or payload can be updated later without regenerating the image — great for campaigns and dynamic redirects.",
+  },
+  {
+    title: "Generate from text or links",
     description:
       "Paste content, generate a code, and keep the workflow simple.",
   },
@@ -15,50 +20,53 @@ const features = [
     description: "Store codes in your workspace for later reuse.",
   },
   {
-    title: "Access history",
-    description: "Review previous codes without digging through downloads.",
-  },
-  {
     title: "Download PNG",
     description:
       "Export a clean image that works across print and digital use.",
   },
   {
-    title: "Clean dashboard",
-    description: "Keep generation and management in one focused view.",
+    title: "Open source",
+    description:
+      "Fully open-source — contributions and issues welcome on GitHub.",
   },
 ];
 
 const steps = [
   {
     number: "01",
-    title: "Enter a link or text",
-    description: "Paste the content you want to encode into a QR code.",
+    title: "Enter content (link, text, or payload)",
+    description:
+      "Paste a link, plain text, or set an initial dynamic payload to encode into a QR code.",
   },
   {
     number: "02",
-    title: "Generate the QR",
-    description: "Create a preview instantly and check it before saving.",
+    title: "Generate & enable dynamic",
+    description:
+      "Create a preview instantly and optionally enable dynamic updates so the QR destination can change later.",
   },
   {
     number: "03",
-    title: "Save or download",
-    description: "Keep it in your dashboard or export a PNG right away.",
+    title: "Save, update, or download",
+    description:
+      "Save to your workspace, update the destination anytime, or export a clean PNG for print.",
   },
 ];
 
 const useCases = [
   {
     title: "Personal sharing",
-    description: "Share a profile, portfolio, or document link quickly.",
+    description:
+      "Share a profile, portfolio, or document link quickly — update the destination later without reprinting.",
   },
   {
     title: "Events",
-    description: "Send attendees to a schedule, form, or registration page.",
+    description:
+      "Send attendees to schedules, forms, or live updates — change links as event details evolve.",
   },
   {
-    title: "Projects",
-    description: "Keep internal links available for teammates and clients.",
+    title: "Campaigns",
+    description:
+      "Use dynamic QR codes for marketing campaigns so you can swap landing pages without reprinting.",
   },
   {
     title: "Quick links",
@@ -96,7 +104,7 @@ export default async function Page() {
       <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[600px] w-[600px] rounded-full bg-emerald-200/20 blur-[100px] opacity-60" />
       <div className="pointer-events-none absolute left-[-10%] top-[60%] h-[600px] w-[600px] rounded-full bg-blue-200/20 blur-[100px] opacity-60" />
 
-      <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-8 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24 lg:pb-14 z-10">
+      <div className="relative mx-auto max-w-6xl px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20 lg:pb-14 z-10">
         <Header />
 
         <section className="grid grid-cols-1 gap-8 py-4 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-14 items-center">
@@ -104,12 +112,24 @@ export default async function Page() {
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none" />
 
             <div className="relative z-10">
-              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1.5 mb-6">
+              {/* <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1.5 mb-6">
                 <span className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></span>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">
                   QR Code Generation
                 </p>
-              </span>
+              </span> */}
+              <div className="inline-flex items-center gap-3 mb-6">
+                <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1.5">
+                  <span className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">
+                    Dynamic QR
+                  </span>
+                </span>
+
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700">
+                  Open source
+                </span>
+              </div>
 
               <h1 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
                 Generate{" "}
@@ -120,9 +140,9 @@ export default async function Page() {
               </h1>
 
               <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-                Create QR codes from links or plain text, save them in your
-                workspace, and download a clean PNG when you need it. Fast,
-                simple, and elegant.
+                Create QR codes from links, plain text, or dynamic content you
+                can update later — save them in your workspace and download a
+                clean PNG when needed. Fast, flexible, and elegant.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -134,16 +154,16 @@ export default async function Page() {
                   <span className="relative">Generate QR</span>
                 </Link>
                 <Link
-                  href="/dashboard"
+                  href="/signup"
                   className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/80 px-6 py-3 text-sm font-medium text-slate-800 backdrop-blur-sm transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:shadow-lg hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
                 >
-                  View dashboard
+                  View Dashboard
                 </Link>
               </div>
 
               <div className="mt-12 grid gap-4 sm:grid-cols-3 border-t border-slate-200/60 pt-8">
                 {[
-                  { label: "Format", value: "Text & Links" },
+                  { label: "Format", value: "Text, Links & Dynamic" },
                   { label: "Export", value: "PNG format" },
                   { label: "Workspace", value: "Save history" },
                 ].map((item) => (
@@ -160,6 +180,10 @@ export default async function Page() {
                   </div>
                 ))}
               </div>
+              <p className="mt-4 text-sm text-slate-500">
+                Open source — contributions, issues, and pull requests are
+                welcome on GitHub.
+              </p>
             </div>
           </article>
 
@@ -173,9 +197,9 @@ export default async function Page() {
                   QR generator
                 </h2>
               </div>
-              <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50/80 px-3 py-1.5 text-xs font-semibold text-emerald-700 shadow-sm">
+              {/* <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50/80 px-3 py-1.5 text-xs font-semibold text-emerald-700 shadow-sm">
                 Ready
-              </span>
+              </span> */}
             </div>
 
             <div className="mt-6 space-y-6">
@@ -377,8 +401,8 @@ export default async function Page() {
                 Ready to create your first QR code?
               </h2>
               <p className="mt-4 text-lg text-slate-600">
-                Join others who are already using QuickR to generate and manage
-                their codes efficiently.
+                Join others who generate, update, and manage dynamic QR codes
+                with QuickR — fully open-source and ready for production.
               </p>
             </div>
 
@@ -409,7 +433,7 @@ export default async function Page() {
                 href="https://github.com/"
                 className="transition-colors hover:text-slate-900"
               >
-                GitHub
+                Source on GitHub
               </a>
               <a
                 href="#features"
