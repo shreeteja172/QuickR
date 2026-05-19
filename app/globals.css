@@ -1,8 +1,51 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #f4f7fb;
   --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #eef2f7;
+  --surface-elevated: #ffffff;
+  --border: #d7dee8;
+  --muted: #64748b;
+  --muted-strong: #334155;
+  --primary: #0f172a;
+  --primary-foreground: #f8fafc;
+  --accent: #e2e8f0;
+  --accent-foreground: #0f172a;
+  --danger: #b91c1c;
+  --success: #15803d;
+  --selection-bg: rgba(15, 23, 42, 0.16);
+  --selection-fg: #0f172a;
+  --toast-bg: #ffffff;
+  --toast-fg: #0f172a;
+  --toast-success-bg: #ecfdf5;
+  --toast-error-bg: #fef2f2;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0b1120;
+  --foreground: #e5ecf7;
+  --surface: #121a2b;
+  --surface-muted: #182235;
+  --surface-elevated: #172033;
+  --border: #24324a;
+  --muted: #94a3b8;
+  --muted-strong: #cbd5e1;
+  --primary: #0f172a;
+  --primary-foreground: #f8fafc;
+  --accent: #24324a;
+  --accent-foreground: #e5ecf7;
+  --danger: #fca5a5;
+  --success: #86efac;
+  --selection-bg: rgba(96, 165, 250, 0.24);
+  --selection-fg: #eff6ff;
+  --toast-bg: #121a2b;
+  --toast-fg: #e5ecf7;
+  --toast-success-bg: #052e16;
+  --toast-error-bg: #450a0a;
 }
 
 @theme inline {
@@ -23,8 +66,103 @@ body {
 }
 
 ::selection {
-  background: rgba(14, 165, 233, 0.2);
-  color: #0f172a;
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .bg-white\/90,
+html[data-theme="dark"] .bg-white\/80,
+html[data-theme="dark"] .bg-white\/70,
+html[data-theme="dark"] .bg-white\/60,
+html[data-theme="dark"] .bg-white\/50 {
+  background-color: var(--surface) !important;
+}
+
+html[data-theme="dark"] .bg-slate-50,
+html[data-theme="dark"] .bg-slate-100 {
+  background-color: var(--surface-muted) !important;
+}
+
+html[data-theme="dark"] .bg-cyan-50,
+html[data-theme="dark"] .bg-cyan-100 {
+  background-color: #12263a !important;
+}
+
+html[data-theme="dark"] .bg-emerald-50,
+html[data-theme="dark"] .bg-emerald-100 {
+  background-color: #10261b !important;
+}
+
+html[data-theme="dark"] .bg-red-50,
+html[data-theme="dark"] .bg-red-100 {
+  background-color: #2a1212 !important;
+}
+
+html[data-theme="dark"] .text-slate-950,
+html[data-theme="dark"] .text-slate-900,
+html[data-theme="dark"] .text-slate-800 {
+  color: var(--foreground) !important;
+}
+
+html[data-theme="dark"] .text-slate-700,
+html[data-theme="dark"] .text-slate-600 {
+  color: var(--muted-strong) !important;
+}
+
+html[data-theme="dark"] .text-slate-500,
+html[data-theme="dark"] .text-slate-400,
+html[data-theme="dark"] .text-slate-300 {
+  color: var(--muted) !important;
+}
+
+html[data-theme="dark"] .text-cyan-800,
+html[data-theme="dark"] .text-cyan-700,
+html[data-theme="dark"] .text-cyan-600 {
+  color: #7dd3fc !important;
+}
+
+html[data-theme="dark"] .text-emerald-800,
+html[data-theme="dark"] .text-emerald-700 {
+  color: #86efac !important;
+}
+
+html[data-theme="dark"] .text-red-700,
+html[data-theme="dark"] .text-red-600 {
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] .border-slate-200,
+html[data-theme="dark"] .border-slate-100 {
+  border-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .border-cyan-200,
+html[data-theme="dark"] .border-emerald-200,
+html[data-theme="dark"] .border-red-200 {
+  border-color: color-mix(in srgb, var(--border) 72%, white) !important;
+}
+
+html[data-theme="dark"] .text-white {
+  color: var(--primary-foreground) !important;
+}
+
+html[data-theme="dark"] .bg-slate-950,
+html[data-theme="dark"] .bg-slate-900 {
+  background-color: var(--primary) !important;
+}
+
+html[data-theme="dark"] .hover\:bg-slate-800:hover {
+  background-color: color-mix(in srgb, var(--primary) 86%, black) !important;
+}
+
+html[data-theme="dark"] .hover\:bg-slate-50:hover,
+html[data-theme="dark"] .hover\:bg-slate-100:hover {
+  background-color: var(--surface-muted) !important;
+}
+
+html[data-theme="dark"] .hover\:border-slate-300:hover {
+  border-color: color-mix(in srgb, var(--border) 78%, white) !important;
 }
 
 a,
@@ -41,4 +179,10 @@ button {
 
 html {
   scroll-behavior: smooth;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  color-scheme: dark;
 }
