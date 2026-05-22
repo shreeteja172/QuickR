@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useSession, signOut } from "@/lib/auth-client";
 import { useRouter, usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 mx-auto w-full max-w-6xl px-4 sm:px-6">
-      <div className="relative rounded-2xl border border-slate-200/80 bg-white/85 px-4 py-3 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.2)] backdrop-blur-md">
+      <div className="relative rounded-2xl border border-slate-200/80 bg-white px-4 py-3 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.2)]">
         <div className="flex items-center justify-between gap-4">
           <Link
             href={session ? "/dashboard" : "/"}
@@ -55,6 +56,10 @@ export default function Header() {
             </svg>
             <span className="hidden md:inline">GitHub</span>
           </a>
+
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
 
           <nav className="flex items-center gap-4">
             <button
@@ -157,6 +162,9 @@ export default function Header() {
         {open && (
           <div className="md:hidden mt-4 pt-4 border-t border-slate-200">
             <div className="space-y-1">
+              <div className="pb-2">
+                <ThemeToggle />
+              </div>
               {!isPending && session ? (
                 <>
                   <Link

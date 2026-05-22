@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession, signOut } from "@/lib/auth-client";
-import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -21,7 +20,7 @@ export default function SettingsPage() {
       await axios.patch("/api/user", { name });
       toast.success("Settings updated successfully.");
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error("Failed to save settings. Please try again.");
     } finally {
       setSaving(false);
@@ -45,7 +44,7 @@ export default function SettingsPage() {
       await signOut();
       toast.success("Account deleted successfully.", { id: "delete-account" });
       router.push("/");
-    } catch (error) {
+    } catch {
       toast.error("Failed to delete account. Please try again.", {
         id: "delete-account",
       });
@@ -54,32 +53,32 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="relative mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <main className="relative mx-auto max-w-5xl px-4 py-6 text-slate-950 dark:text-slate-100 sm:px-6 lg:px-8 lg:py-8">
       <header className="mb-10 max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
           Preferences
         </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-100 sm:text-4xl">
           Account Settings
         </h1>
-        <p className="mt-4 text-base leading-7 text-slate-600">
+        <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
           Manage your personal details, workspace preferences, and security
           settings.
         </p>
       </header>
 
       <div className="space-y-8">
-        <section className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
-          <h2 className="text-lg font-semibold text-slate-950">
+        <section className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] dark:border-slate-700 dark:bg-slate-900 sm:p-8">
+          <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-100">
             Profile Details
           </h2>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             This is how we identify you in the QuickR platform.
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-3">
-              <label className="block text-sm font-semibold text-slate-900">
+              <label className="block text-sm font-semibold text-slate-900 dark:text-slate-100">
                 Name
               </label>
               <input
@@ -88,12 +87,12 @@ export default function SettingsPage() {
                 onChange={(e) => setName(e.target.value)}
                 disabled={isPending || saving}
                 placeholder="Your name"
-                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:ring-4 focus:ring-slate-100"
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:ring-4 focus:ring-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-slate-500 dark:focus:ring-slate-800"
               />
             </div>
 
             <div className="space-y-3">
-              <label className="block text-sm font-semibold text-slate-900">
+              <label className="block text-sm font-semibold text-slate-900 dark:text-slate-100">
                 Email Address
               </label>
               <input
@@ -102,84 +101,86 @@ export default function SettingsPage() {
                 readOnly
                 disabled
                 placeholder="you@example.com"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500 outline-none cursor-not-allowed"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500 outline-none cursor-not-allowed dark:border-slate-700 dark:bg-slate-950 dark:text-slate-400"
               />
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Your email is tied to your account and cannot be changed.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
-          <h2 className="text-lg font-semibold text-slate-950">
+        <section className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] dark:border-slate-700 dark:bg-slate-900 sm:p-8">
+          <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-100">
             Workspace Preferences
           </h2>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Customize how your QR codes are generated and managed by default.
           </p>
 
           <div className="mt-6 space-y-4">
-            <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-950">
               <div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   High-Resolution Downloads
                 </p>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                   Export QR codes in maximum PNG quality by default.
                 </p>
               </div>
               <button
                 type="button"
-                className="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-950 transition-colors"
+                className="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-950 transition-colors dark:bg-slate-100"
                 aria-pressed="true"
               >
-                <span className="inline-block h-4 w-4 translate-x-6 rounded-full bg-white transition-transform" />
+                <span className="inline-block h-4 w-4 translate-x-6 rounded-full bg-white transition-transform dark:bg-slate-900" />
               </button>
             </div>
 
-            <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-950">
               <div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                   Weekly Analytics Report
                 </p>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                   Receive an email with your QR scan statistics.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setAnalyticsEnabled(!analyticsEnabled)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${analyticsEnabled ? "bg-slate-950" : "bg-slate-200"}`}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${analyticsEnabled ? "bg-slate-950 dark:bg-slate-100" : "bg-slate-200 dark:bg-slate-700"}`}
                 aria-pressed={analyticsEnabled}
               >
                 <span
-                  className={`inline-block h-4 w-4 rounded-full bg-white transition-transform ${analyticsEnabled ? "translate-x-6" : "translate-x-1"}`}
+                  className={`inline-block h-4 w-4 rounded-full bg-white transition-transform dark:bg-slate-900 ${analyticsEnabled ? "translate-x-6" : "translate-x-1"}`}
                 />
               </button>
             </div>
           </div>
         </section>
 
-        <section className="rounded-4xl border border-red-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
-          <h2 className="text-lg font-semibold text-red-700">Danger Zone</h2>
-          <p className="mt-1 text-sm text-slate-500">
+        <section className="rounded-4xl border border-red-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] dark:border-red-900/60 dark:bg-slate-900 sm:p-8">
+          <h2 className="text-lg font-semibold text-red-700 dark:text-red-300">
+            Danger Zone
+          </h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Irreversible, destructive actions related to your account.
           </p>
 
-          <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-red-100 bg-red-50 p-5">
+          <div className="mt-6 flex flex-col items-start gap-4 rounded-2xl border border-red-100 bg-red-50 p-5 sm:flex-row sm:items-center sm:justify-between dark:border-red-900/40 dark:bg-red-950/30">
             <div>
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                 Delete Account
               </p>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                 Permanently remove your account and all associated QR codes.
               </p>
             </div>
             <button
               onClick={handleDeleteAccount}
               disabled={deleting}
-              className="rounded-xl border border-red-200 bg-white px-5 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:border-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="rounded-xl border border-red-200 bg-white px-5 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:border-red-300 disabled:cursor-not-allowed disabled:opacity-50 dark:border-red-900/60 dark:bg-slate-950 dark:text-red-300 dark:hover:bg-slate-900"
             >
               {deleting ? "Deleting..." : "Delete Account"}
             </button>
@@ -190,7 +191,7 @@ export default function SettingsPage() {
           <button
             onClick={handleSave}
             disabled={saving || isPending}
-            className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-8 py-3.5 text-sm font-medium text-white transition hover:bg-slate-800 disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-8 py-3.5 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70 shadow-md hover:shadow-lg hover:-translate-y-0.5 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
           >
             {saving ? "Saving Changes..." : "Save Changes"}
           </button>
