@@ -98,14 +98,19 @@ export default async function Page() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950 selection:bg-slate-200 selection:text-slate-900 overflow-hidden relative dark:bg-slate-950 dark:text-slate-100 dark:selection:bg-slate-800 dark:selection:text-slate-100">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-800" />
+    <main className="min-h-screen bg-slate-50 text-slate-950 selection:bg-cyan-200 selection:text-cyan-900 overflow-hidden relative">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+      <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-200/30 blur-[100px] opacity-70" />
+      <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[600px] w-[600px] rounded-full bg-emerald-200/20 blur-[100px] opacity-60" />
+      <div className="pointer-events-none absolute left-[-10%] top-[60%] h-[600px] w-[600px] rounded-full bg-blue-200/20 blur-[100px] opacity-60" />
 
       <div className="relative mx-auto max-w-6xl px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20 lg:pb-14 z-10">
         <Header />
 
         <section className="grid grid-cols-1 gap-8 py-4 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-14 items-center">
-          <article className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_12px_36px_-12px_rgba(15,23,42,0.08)] sm:p-10 lg:p-12 transition-all duration-300 hover:shadow-[0_20px_50px_-12px_rgba(15,23,42,0.12)] relative overflow-hidden dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_12px_36px_-12px_rgba(0,0,0,0.45)]">
+          <article className="rounded-[2rem] border border-white/50 bg-white/70 backdrop-blur-xl p-6 shadow-[0_12px_36px_-12px_rgba(15,23,42,0.08)] sm:p-10 lg:p-12 transition-all duration-300 hover:shadow-[0_20px_50px_-12px_rgba(15,23,42,0.12)] relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none" />
+
             <div className="relative z-10">
               {/* <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1.5 mb-6">
                 <span className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></span>
@@ -114,27 +119,27 @@ export default async function Page() {
                 </p>
               </span> */}
               <div className="inline-flex items-center gap-3 mb-6">
-                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 dark:border-slate-700 dark:bg-slate-950/60">
-                  <span className="h-2 w-2 rounded-full bg-slate-500 dark:bg-slate-400"></span>
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
+                <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1.5">
+                  <span className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">
                     Dynamic QR
                   </span>
                 </span>
 
-                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:border-slate-700 dark:bg-slate-950/60 dark:text-slate-300">
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700">
                   Open source
                 </span>
               </div>
 
-              <h1 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
+              <h1 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
                 Generate{" "}
-                <span className="text-slate-700 dark:text-slate-300">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-600">
                   QR codes
                 </span>{" "}
                 without friction
               </h1>
 
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300">
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
                 Create QR codes from links, plain text, or dynamic content you
                 can update later — save them in your workspace and download a
                 clean PNG when needed. Fast, flexible, and elegant.
@@ -143,19 +148,20 @@ export default async function Page() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/dashboard/create"
-                  className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-8 py-4 text-base font-medium text-white shadow-xl shadow-slate-900/20 transition-all duration-300 hover:bg-slate-800 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-slate-400 dark:focus-visible:ring-offset-slate-950"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl bg-slate-950 px-8 py-4 text-base font-medium text-white shadow-xl shadow-slate-900/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-cyan-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
                 >
-                  Generate QR
+                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-400/10 to-cyan-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></span>
+                  <span className="relative">Generate QR</span>
                 </Link>
                 <Link
                   href="/signup"
-                  className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-8 py-4 text-base font-medium text-slate-800 shadow-sm transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900 dark:focus-visible:ring-slate-400 dark:focus-visible:ring-offset-slate-950"
+                  className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/80 px-6 py-3 text-sm font-medium text-slate-800 backdrop-blur-sm transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:shadow-lg hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
                 >
                   View Dashboard
                 </Link>
               </div>
 
-              <div className="mt-12 grid gap-4 border-t border-slate-200/60 pt-8 sm:grid-cols-3 dark:border-slate-800">
+              <div className="mt-12 grid gap-4 sm:grid-cols-3 border-t border-slate-200/60 pt-8">
                 {[
                   { label: "Format", value: "Text, Links & Dynamic" },
                   { label: "Export", value: "PNG format" },
@@ -163,31 +169,31 @@ export default async function Page() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="group rounded-2xl border border-slate-100 bg-white/50 px-5 py-4 transition-all duration-300 hover:bg-white hover:shadow-md hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:bg-slate-900"
+                    className="group rounded-2xl border border-slate-100 bg-white/50 px-5 py-4 transition-all duration-300 hover:bg-white hover:shadow-md hover:-translate-y-1"
                   >
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 group-hover:text-cyan-600 transition-colors dark:text-slate-500 dark:group-hover:text-slate-300">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 group-hover:text-cyan-600 transition-colors">
                       {item.label}
                     </p>
-                    <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-slate-100">
+                    <p className="mt-2 text-sm font-semibold text-slate-900">
                       {item.value}
                     </p>
                   </div>
                 ))}
               </div>
-              <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-4 text-sm text-slate-500">
                 Open source — contributions, issues, and pull requests are
                 welcome on GitHub.
               </p>
             </div>
           </article>
 
-          <aside className="group rounded-4xl border border-white/60 bg-white p-6 shadow-[0_12px_36px_-12px_rgba(15,23,42,0.08)] sm:p-8 lg:p-10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(15,23,42,0.12)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_12px_36px_-12px_rgba(0,0,0,0.45)]">
-            <div className="flex items-center justify-between gap-3 border-b border-slate-200/60 pb-5 dark:border-slate-800">
+          <aside className="group rounded-[2rem] border border-white/60 bg-white/40 backdrop-blur-xl p-6 shadow-[0_12px_36px_-12px_rgba(15,23,42,0.08)] sm:p-8 lg:p-10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(15,23,42,0.12)]">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-200/60 pb-5">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">
                   Product preview
                 </p>
-                <h2 className="mt-1 text-xl font-bold text-slate-900 dark:text-slate-100">
+                <h2 className="mt-1 text-xl font-bold text-slate-900">
                   QR generator
                 </h2>
               </div>
@@ -198,7 +204,7 @@ export default async function Page() {
 
             <div className="mt-6 space-y-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
+                <label className="block text-sm font-semibold text-slate-700">
                   Content
                 </label>
                 <div className="relative">
@@ -206,17 +212,17 @@ export default async function Page() {
                     type="text"
                     readOnly
                     value="https://quickr.app/dashboard/create"
-                    className="w-full rounded-2xl border border-slate-200 bg-white/80 px-5 py-4 text-sm text-slate-900 outline-none shadow-inner transition-colors group-hover:border-slate-300 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:group-hover:border-slate-600"
+                    className="w-full rounded-2xl border border-slate-200 bg-white/80 px-5 py-4 text-sm text-slate-900 outline-none shadow-inner transition-colors group-hover:border-slate-300"
                   />
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 p-2">
-                    <div className="h-4 w-4 rounded-full bg-emerald-400 opacity-80 shadow-[0_0_10px_rgba(52,211,153,0.6)] dark:bg-emerald-300"></div>
+                    <div className="h-4 w-4 rounded-full bg-emerald-400 opacity-80 shadow-[0_0_10px_rgba(52,211,153,0.6)]"></div>
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-[1fr_auto]">
-                <div className="rounded-4xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-300 group-hover:shadow-md dark:border-slate-800 dark:bg-slate-950">
-                  <div className="mx-auto grid aspect-square w-full max-w-64 grid-cols-13 gap-1 rounded-3xl bg-slate-50 p-5 shadow-inner dark:bg-slate-900">
+                <div className="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm transition-all duration-300 group-hover:shadow-md">
+                  <div className="mx-auto grid aspect-square w-full max-w-64 grid-cols-13 gap-1 rounded-3xl bg-slate-50 p-5 shadow-inner">
                     {qrPattern.flatMap((row, rowIndex) =>
                       row.map((cell, cellIndex) => (
                         <span
@@ -224,8 +230,8 @@ export default async function Page() {
                           className={[
                             "rounded-sm transition-all duration-500",
                             cell
-                              ? "bg-slate-900 group-hover:bg-slate-800 dark:bg-slate-100 dark:group-hover:bg-white"
-                              : "bg-white dark:bg-slate-950",
+                              ? "bg-slate-900 group-hover:bg-slate-800"
+                              : "bg-white",
                           ].join(" ")}
                           style={{
                             transitionDelay: `${(rowIndex * 13 + cellIndex) * 2}ms`,
@@ -235,31 +241,31 @@ export default async function Page() {
                     )}
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between gap-3 text-xs font-medium text-slate-500 dark:text-slate-400">
+                  <div className="mt-5 flex items-center justify-between gap-3 text-xs font-medium text-slate-500">
                     <span className="flex items-center gap-1.5">
-                      <div className="h-1.5 w-1.5 rounded-full bg-slate-400 dark:bg-slate-500"></div>{" "}
+                      <div className="h-1.5 w-1.5 rounded-full bg-slate-400"></div>{" "}
                       Preview
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 dark:bg-emerald-300"></div>{" "}
+                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-400"></div>{" "}
                       PNG export enabled
                     </span>
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-between gap-4 rounded-4xl border border-slate-100 bg-slate-50/50 p-5 sm:w-48 transition-colors group-hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:group-hover:bg-slate-900">
+                <div className="flex flex-col justify-between gap-4 rounded-[2rem] border border-slate-100 bg-slate-50/50 p-5 sm:w-48 transition-colors group-hover:bg-slate-50">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                       Export
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600">
                       Save a clean, high-res image for print, signage, or
                       sharing across platforms.
                     </p>
                   </div>
                   <button
                     type="button"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-slate-800 hover:-translate-y-0.5 hover:shadow-lg dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-slate-800 hover:-translate-y-0.5 hover:shadow-lg"
                   >
                     <svg
                       className="w-4 h-4"
@@ -283,33 +289,33 @@ export default async function Page() {
         </section>
 
         <section id="features" className="mt-12 py-16 lg:py-24 relative">
-          <div className="absolute inset-0 rounded-[3rem] border border-slate-200 bg-white -z-10 shadow-[0_8px_30px_rgb(0,0,0,0.02)] dark:border-slate-800 dark:bg-slate-900"></div>
+          <div className="absolute inset-0 bg-white/40 backdrop-blur-3xl rounded-[3rem] border border-white/60 -z-10 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"></div>
 
           <div className="max-w-3xl px-8 pt-8">
-            <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-700">
+            <span className="inline-block rounded-full bg-cyan-100/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-800">
               Features
             </span>
-            <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-100">
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
               Built for a practical workflow
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
               QuickR keeps the interface focused on generation, storage, and
               download so the product stays fast to use.
             </p>
           </div>
 
           <div className="mt-12 grid grid-cols-1 gap-6 px-8 pb-8 md:grid-cols-2 xl:grid-cols-3">
-            {features.map((feature) => (
+            {features.map((feature, i) => (
               <article
                 key={feature.title}
-                className="group relative rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-950 dark:hover:shadow-black/30"
+                className="group relative rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50"
               >
-                <div className="absolute inset-0 rounded-3xl bg-slate-50/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none dark:group-hover:opacity-0"></div>
-                <div className="h-2 w-12 rounded-full bg-slate-300 mb-6 transition-all duration-300 group-hover:w-16 dark:bg-slate-700" />
-                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50/50 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"></div>
+                <div className="h-2 w-12 rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400 mb-6 transition-all duration-300 group-hover:w-16" />
+                <h3 className="text-xl font-bold text-slate-900">
                   {feature.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
+                <p className="mt-3 text-base leading-relaxed text-slate-600">
                   {feature.description}
                 </p>
               </article>
@@ -320,13 +326,13 @@ export default async function Page() {
         <section id="how-it-works" className="mt-8 py-16 lg:py-24">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div className="max-w-xl">
-              <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-700">
+              <span className="inline-block rounded-full bg-emerald-100/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-emerald-800">
                 How it works
               </span>
-              <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-100">
+              <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
                 Three steps to perfection
               </h2>
-              <p className="mt-5 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+              <p className="mt-5 text-lg leading-relaxed text-slate-600">
                 The flow stays short on purpose. Each step maps directly to the
                 actual action you need to complete, saving you time and clicks.
               </p>
@@ -336,15 +342,15 @@ export default async function Page() {
               {steps.map((step) => (
                 <article
                   key={step.number}
-                  className="group relative rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700 dark:hover:shadow-black/30"
+                  className="group relative rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-100 hover:shadow-xl hover:shadow-emerald-100/50"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-xl font-black text-slate-900 transition-colors duration-300 group-hover:bg-slate-100 group-hover:text-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:group-hover:bg-slate-800">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-xl font-black text-slate-900 transition-colors duration-300 group-hover:bg-emerald-50 group-hover:text-emerald-700">
                     {step.number}
                   </span>
-                  <h3 className="mt-6 text-lg font-bold text-slate-900 dark:text-slate-100">
+                  <h3 className="mt-6 text-lg font-bold text-slate-900">
                     {step.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
                     {step.description}
                   </p>
                 </article>
@@ -354,10 +360,14 @@ export default async function Page() {
         </section>
 
         <section id="use-cases" className="mt-8 py-16 lg:py-24 relative">
-          <div className="absolute inset-0 bg-slate-900 rounded-[3rem] -z-10 overflow-hidden dark:bg-slate-950"></div>
+          <div className="absolute inset-0 bg-slate-900 rounded-[3rem] -z-10 overflow-hidden">
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+            <div className="absolute top-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-900/40 blur-[80px]"></div>
+            <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-emerald-900/30 blur-[80px]"></div>
+          </div>
 
           <div className="max-w-3xl px-8 pt-12">
-            <span className="inline-block rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-400">
+            <span className="inline-block rounded-full border border-slate-700 bg-slate-800/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-300">
               Use cases
             </span>
             <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -369,12 +379,12 @@ export default async function Page() {
             {useCases.map((useCase) => (
               <article
                 key={useCase.title}
-                className="group rounded-3xl border border-slate-800 bg-slate-800 p-8 transition-all duration-300 hover:bg-slate-700 hover:border-slate-600 hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
+                className="group rounded-3xl border border-slate-800 bg-slate-800/40 backdrop-blur-sm p-8 transition-all duration-300 hover:bg-slate-800 hover:border-slate-600 hover:-translate-y-1"
               >
-                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors dark:text-slate-100 dark:group-hover:text-slate-50">
+                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
                   {useCase.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400 group-hover:text-slate-300 dark:text-slate-400 dark:group-hover:text-slate-300">
+                <p className="mt-3 text-sm leading-relaxed text-slate-400 group-hover:text-slate-300">
                   {useCase.description}
                 </p>
               </article>
@@ -383,12 +393,14 @@ export default async function Page() {
         </section>
 
         <section className="mt-12 py-10">
-          <div className="group relative overflow-hidden rounded-[3rem] border border-slate-200 bg-white p-10 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.1)] sm:p-16 lg:flex lg:items-center lg:justify-between lg:gap-12 transition-all duration-500 hover:shadow-[0_30px_60px_-20px_rgba(15,23,42,0.15)] hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-950">
+          <div className="group relative overflow-hidden rounded-[3rem] border border-slate-200/60 bg-white/60 backdrop-blur-xl p-10 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.1)] sm:p-16 lg:flex lg:items-center lg:justify-between lg:gap-12 transition-all duration-500 hover:shadow-[0_30px_60px_-20px_rgba(15,23,42,0.15)] hover:bg-white/80">
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-cyan-200/40 to-emerald-200/40 blur-3xl transition-transform duration-700 group-hover:scale-150"></div>
+
             <div className="relative z-10 max-w-2xl">
-              <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-100">
+              <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
                 Ready to create your first QR code?
               </h2>
-              <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
+              <p className="mt-4 text-lg text-slate-600">
                 Join others who generate, update, and manage dynamic QR codes
                 with QuickR — fully open-source and ready for production.
               </p>
@@ -396,7 +408,7 @@ export default async function Page() {
 
             <Link
               href="/signup"
-              className="relative z-10 mt-8 w-full inline-flex items-center justify-center rounded-2xl bg-slate-950 px-8 py-5 text-lg font-semibold text-white transition-all duration-300 hover:bg-slate-800 hover:scale-[1.02] hover:shadow-xl sm:w-auto lg:mt-0 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
+              className="relative z-10 mt-8 w-full inline-flex items-center justify-center rounded-2xl bg-slate-950 px-8 py-5 text-lg font-semibold text-white transition-all duration-300 hover:bg-slate-800 hover:scale-[1.02] hover:shadow-xl sm:w-auto lg:mt-0"
             >
               Start Generating Now
             </Link>

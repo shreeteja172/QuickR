@@ -17,7 +17,7 @@ export default function QRForm({
 }: Props) {
   return (
     <form
-      className="mt-8 space-y-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)]"
+      className="mt-8 space-y-5 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm"
       onSubmit={(e) => {
         e.preventDefault();
         generateQR();
@@ -27,7 +27,7 @@ export default function QRForm({
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Paste a URL or text you want to encode"
-        className="min-h-32 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100"
+        className="min-h-32 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white focus:ring-4 focus:ring-sky-100"
       />
 
       {error && (

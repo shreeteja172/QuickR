@@ -29,31 +29,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => {
-              try {
-                const stored = localStorage.getItem('quickr-theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const theme = stored === 'light' || stored === 'dark' ? stored : prefersDark ? 'dark' : 'light';
-                document.documentElement.dataset.theme = theme;
-              } catch (_) {
-                document.documentElement.dataset.theme = 'light';
-              }
-            })();`,
-          }}
-        />
-      </head>
-      <body
-        className="min-h-full flex flex-col"
-        style={{
-          backgroundColor: "var(--background)",
-          color: "var(--foreground)",
-        }}
-      >
+      <body className="min-h-full flex flex-col bg-white text-slate-950">
         <Providers>{children}</Providers>
       </body>
     </html>

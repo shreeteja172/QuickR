@@ -146,8 +146,8 @@ export default function QRDetail() {
             QR code not found
           </p>
           <p className="mt-2 text-sm text-slate-500 max-w-md">
-            The QR code you're looking for doesn't exist, has been deleted, or
-            you don't have permission to view it.
+            The QR code you&apos;re looking for doesn&apos;t exist, has been
+            deleted, or you don&apos;t have permission to view it.
           </p>
           <Link
             href="/dashboard/qr"
@@ -330,8 +330,7 @@ export default function QRDetail() {
               </p>
             </div>
 
-            <div className="flex justify-center rounded-3xl bg-slate-50 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] p-8 border border-slate-200 shadow-inner relative group overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-200/30 to-transparent rounded-3xl pointer-events-none"></div>
+            <div className="flex justify-center rounded-3xl bg-slate-50 p-8 border border-slate-200 shadow-inner relative group overflow-hidden">
               <div className="relative rounded-2xl bg-white p-4 shadow-xl ring-1 ring-slate-900/5 transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl">
                 <Image
                   src={data.image}
