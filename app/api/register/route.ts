@@ -1,20 +1,9 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { Resend } from "resend";
 import prisma from "@/lib/db";
+import { sendOtpEmail } from "@/lib/mailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-function genericRegisterAccepted() {
-  return NextResponse.json(
-    {
-      success: true,
-      message:
-        "If your request is valid, you will receive verification instructions shortly.",
-    },
-    { status: 200 },
-  );
-}
+const OTP_EXPIRY_MS = 5 * 60 * 1000;
 
 export async function POST(req: Request) {
   try {
@@ -29,50 +18,45 @@ export async function POST(req: Request) {
 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
-      return genericRegisterAccepted();
+      return NextResponse.json(
+        { error: "An account with this email already exists" },
+        { status: 409 },
+      );
     }
 
-    const hashed = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await prisma.user.create({
-      data: { email, password: hashed, name: name || null },
+      data: { email, password: hashedPassword, name: name || null },
     });
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const hashedOtp = await bcrypt.hash(otp, 10);
+
+    await prisma.otp.deleteMany({ where: { email } });
 
     await prisma.otp.create({
       data: {
         email,
-        otp,
-        expiresAt: new Date(Date.now() + 5 * 60 * 1000),
+        otp: hashedOtp,
+        expiresAt: new Date(Date.now() + OTP_EXPIRY_MS),
       },
     });
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY missing: cannot send verification email");
+    try {
+      await sendOtpEmail(email, otp);
+    } catch (emailErr) {
+      console.error("Failed to send verification email:", emailErr);
       return NextResponse.json(
-        { error: "Server misconfigured: email service not configured" },
-        { status: 500 },
+        { error: "Account created but we could not send the verification email. Please try resending the code." },
+        { status: 201 },
       );
     }
 
-    const { error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: email,
-      subject: "Verify your account",
-      // ...getVerificationEmail(otp),
-      html: `<h1>Your OTP is ${otp}</h1>`,
-    });
-
-    if (error) {
-      console.error("EMAIL SEND FAILED:", error);
-      return NextResponse.json(
-        { error: "Unable to process request" },
-        { status: 500 },
-      );
-    }
-
-    return genericRegisterAccepted();
+    return NextResponse.json(
+      { success: true, message: "Account created. Check your email for the verification code." },
+      { status: 200 },
+    );
   } catch (err) {
     console.error("Registration error:", err);
     return NextResponse.json(

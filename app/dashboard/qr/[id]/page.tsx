@@ -113,11 +113,11 @@ export default function QRDetail() {
 
   if (isLoading) {
     return (
-      <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="mb-6 h-6 w-48 animate-pulse rounded-md bg-slate-200"></div>
+      <main className="relative mx-auto max-w-[1280px] px-8 py-12 sm:px-10 lg:px-12 lg:py-16">
+        <div className="mb-6 h-6 w-48 animate-pulse rounded-md bg-hairline-soft"></div>
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
-          <div className="h-100 animate-pulse rounded-4xl bg-slate-100 border border-slate-200"></div>
-          <div className="h-125 animate-pulse rounded-4xl bg-slate-100 border border-slate-200"></div>
+          <div className="h-100 animate-pulse rounded-lg bg-surface border border-hairline-soft"></div>
+          <div className="h-125 animate-pulse rounded-lg bg-surface border border-hairline-soft"></div>
         </section>
       </main>
     );
@@ -126,10 +126,10 @@ export default function QRDetail() {
   if (!data) {
     return (
       <main className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-4xl border border-slate-200 bg-white p-10 text-center shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)]">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100">
+        <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-lg border border-hairline-soft bg-canvas p-10 text-center">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-surface">
             <svg
-              className="h-8 w-8 text-slate-400"
+              className="h-8 w-8 text-stone"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -142,16 +142,16 @@ export default function QRDetail() {
               />
             </svg>
           </div>
-          <p className="text-xl font-semibold text-slate-900">
+          <p className="text-xl font-medium text-ink">
             QR code not found
           </p>
-          <p className="mt-2 text-sm text-slate-500 max-w-md">
+          <p className="mt-2 text-sm text-stone max-w-md">
             The QR code you&apos;re looking for doesn&apos;t exist, has been
             deleted, or you don&apos;t have permission to view it.
           </p>
           <Link
             href="/dashboard/qr"
-            className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-800 shadow-md hover:shadow-lg"
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-md bg-ink px-6 py-3 text-sm font-medium text-on-dark transition hover:bg-charcoal"
           >
             <svg
               className="h-4 w-4"
@@ -176,35 +176,35 @@ export default function QRDetail() {
   const isValid = newlink.trim() !== "";
 
   return (
-    <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <main className="relative mx-auto max-w-[1280px] px-8 py-12 sm:px-10 lg:px-12 lg:py-16">
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
         <div className="flex flex-col gap-6">
-          <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          <div className="rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
+            <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
               QR Detail
             </p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+            <h1 className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]">
               Update and inspect
             </h1>
-            <p className="mt-3 text-sm leading-6 text-slate-600 max-w-xl">
+            <p className="mt-3 text-sm leading-[1.55] text-slate max-w-xl">
               Manage your QR code destination, track its configuration, and
               update it in real-time without replacing the physical code.
             </p>
 
-            <div className="mt-8 rounded-3xl border border-slate-100 bg-slate-50 p-6 shadow-inner">
+            <div className="mt-8 rounded-md border border-hairline-soft bg-surface p-6">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
                   Current destination
                 </p>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="break-all text-sm font-medium text-slate-900 bg-white border border-slate-200 py-3 px-4 rounded-xl flex-1 shadow-sm">
+                <p className="break-all text-sm font-medium text-ink bg-canvas border border-hairline-soft py-3 px-4 rounded-md flex-1">
                   {data.data}
                 </p>
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={copyToClipboard}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 shadow-sm"
+                    className="inline-flex items-center justify-center gap-2 rounded-md bg-ink px-4 py-3 text-sm font-medium text-on-dark transition hover:bg-charcoal focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
                   >
                     {isCopied ? (
                       <svg
@@ -241,7 +241,7 @@ export default function QRDetail() {
                     href={data.data}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2 shadow-sm"
+                    className="inline-flex items-center justify-center rounded-md border border-hairline-strong bg-canvas px-4 py-3 text-sm font-medium text-slate transition hover:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
                     title="Open live link"
                   >
                     <svg
@@ -263,11 +263,11 @@ export default function QRDetail() {
             </div>
           </div>
 
-          <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
-            <h2 className="text-lg font-semibold text-slate-900 mb-1">
+          <div className="rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
+            <h2 className="text-lg font-medium text-ink mb-1">
               Developer Actions
             </h2>
-            <p className="text-sm text-slate-500 mb-6">
+            <p className="text-sm text-stone mb-6">
               Modify the destination URL dynamically without changing the
               physical QR code.
             </p>
@@ -275,7 +275,7 @@ export default function QRDetail() {
             <div className="space-y-4">
               <label
                 htmlFor="new-link"
-                className="block text-sm font-semibold text-slate-900"
+                className="block text-sm font-medium text-ink"
               >
                 Replace destination URL
               </label>
@@ -286,12 +286,12 @@ export default function QRDetail() {
                   value={newlink}
                   onChange={(e) => setNewlink(e.target.value)}
                   placeholder="https://example.com/new-path"
-                  className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:ring-4 focus:ring-slate-100"
+                  className="flex-1 rounded-md border border-hairline-strong bg-surface px-4 py-3 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
                 <button
                   onClick={updateData}
                   disabled={!isValid || mutation.isPending}
-                  className="inline-flex shrink-0 items-center justify-center rounded-xl bg-slate-950 px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 shadow-md hover:shadow-lg"
+                  className="inline-flex shrink-0 items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-on-primary transition hover:bg-primary-deep disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
                 >
                   {mutation.isPending ? "Updating..." : "Update Route"}
                 </button>
@@ -299,19 +299,19 @@ export default function QRDetail() {
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 mb-1">
+              <div className="rounded-md border border-hairline-soft bg-surface p-4">
+                <p className="text-[11px] uppercase tracking-[1px] text-stone mb-1">
                   System ID
                 </p>
-                <p className="truncate text-sm font-medium text-slate-900 font-mono">
+                <p className="truncate text-sm font-medium text-ink font-[family-name:var(--font-jetbrains-mono)]">
                   {id}
                 </p>
               </div>
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 mb-1">
+              <div className="rounded-md border border-hairline-soft bg-surface p-4">
+                <p className="text-[11px] uppercase tracking-[1px] text-stone mb-1">
                   Analytics
                 </p>
-                <p className="text-sm font-medium text-slate-400 italic">
+                <p className="text-sm text-stone italic">
                   Tracking coming soon...
                 </p>
               </div>
@@ -320,25 +320,25 @@ export default function QRDetail() {
         </div>
 
         <div className="flex flex-col">
-          <div className="sticky top-8 space-y-6 rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
+          <div className="sticky top-8 space-y-6 rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
             <div className="text-center mb-6">
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="text-lg font-medium text-ink">
                 QR Code Preview
               </h3>
-              <p className="text-sm text-slate-500 mt-1">
+              <p className="text-sm text-stone mt-1">
                 Ready to scan and share
               </p>
             </div>
 
-            <div className="flex justify-center rounded-3xl bg-slate-50 p-8 border border-slate-200 shadow-inner relative group overflow-hidden">
-              <div className="relative rounded-2xl bg-white p-4 shadow-xl ring-1 ring-slate-900/5 transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl">
+            <div className="flex justify-center rounded-md bg-surface p-8 border border-hairline-soft relative group overflow-hidden">
+              <div className="relative rounded-md bg-canvas p-4 shadow-[0_4px_12px_rgba(0,0,0,0.04)] ring-1 ring-hairline transition-transform duration-500 group-hover:scale-105">
                 <Image
                   src={data.image}
                   width={260}
                   height={260}
                   alt="QR Code"
                   unoptimized
-                  className="rounded-xl"
+                  className="rounded-md"
                 />
               </div>
             </div>
@@ -346,7 +346,7 @@ export default function QRDetail() {
             <button
               onClick={downloadQRImage}
               disabled={downloading}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-slate-900 bg-slate-900 px-4 py-4 text-sm font-semibold text-white transition hover:bg-slate-800 hover:border-slate-800 disabled:cursor-not-allowed disabled:opacity-60 shadow-lg hover:shadow-xl"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-ink px-4 py-4 text-sm font-medium text-on-dark transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60"
             >
               <svg
                 className="h-5 w-5"
@@ -364,7 +364,7 @@ export default function QRDetail() {
               {downloading ? "Downloading..." : "Download High-Res QR"}
             </button>
 
-            <p className="text-center text-xs text-slate-400 mt-4">
+            <p className="text-center text-xs text-stone mt-4">
               Downloads as PNG optimized for print and digital use.
             </p>
           </div>

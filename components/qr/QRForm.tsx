@@ -17,21 +17,24 @@ export default function QRForm({
 }: Props) {
   return (
     <form
-      className="mt-8 space-y-5 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_18px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur-sm"
+      className="mt-8 space-y-5 rounded-lg border border-beige-deep bg-cream p-8"
       onSubmit={(e) => {
         e.preventDefault();
         generateQR();
       }}
     >
+      <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
+        Content
+      </p>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Paste a URL or text you want to encode"
-        className="min-h-32 w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white focus:ring-4 focus:ring-sky-100"
+        className="min-h-32 w-full rounded-md border border-hairline-strong bg-canvas p-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
       />
 
       {error && (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}
         </p>
       )}
@@ -39,7 +42,7 @@ export default function QRForm({
       <button
         type="submit"
         disabled={isGenerating || !text.trim()}
-        className="inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-medium text-on-primary transition hover:bg-primary-deep disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isGenerating ? "Generating..." : "Generate QR"}
       </button>
@@ -48,7 +51,7 @@ export default function QRForm({
         <a
           href={qr}
           download="qrcode.png"
-          className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:shadow-sm"
+          className="inline-flex w-full items-center justify-center rounded-md bg-ink px-5 py-3 text-sm font-medium text-on-dark transition hover:bg-charcoal"
         >
           Download
         </a>

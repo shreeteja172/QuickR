@@ -1,19 +1,9 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import bcrypt from "bcryptjs";
 import prisma from "@/lib/db";
+import { sendOtpEmail } from "@/lib/mailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-function acceptedResponse() {
-  return NextResponse.json(
-    {
-      success: true,
-      message:
-        "If your request is valid, you will receive verification instructions shortly.",
-    },
-    { status: 202 },
-  );
-}
+const OTP_EXPIRY_MS = 5 * 60 * 1000;
 
 async function ensureMinimumLatency(startedAt: number, minimumMs = 400) {
   const elapsed = Date.now() - startedAt;
@@ -34,43 +24,55 @@ export async function POST(req: Request) {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       await ensureMinimumLatency(startedAt);
-      return acceptedResponse();
+      return NextResponse.json(
+        { success: true, message: "If your request is valid, you will receive verification instructions shortly." },
+        { status: 202 },
+      );
+    }
+
+    if (user.emailVerified) {
+      await ensureMinimumLatency(startedAt);
+      return NextResponse.json(
+        { error: "Email is already verified." },
+        { status: 400 },
+      );
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const hashedOtp = await bcrypt.hash(otp, 10);
+
+    await prisma.otp.deleteMany({ where: { email } });
 
     await prisma.otp.create({
       data: {
         email,
-        otp,
-        expiresAt: new Date(Date.now() + 5 * 60 * 1000),
+        otp: hashedOtp,
+        expiresAt: new Date(Date.now() + OTP_EXPIRY_MS),
       },
     });
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY missing: cannot send verification email");
+    try {
+      await sendOtpEmail(email, otp);
+    } catch (emailErr) {
+      console.error("Failed to send verification email:", emailErr);
       await ensureMinimumLatency(startedAt);
-      return acceptedResponse();
-    }
-
-    const { error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: email,
-      subject: "Verify your account",
-      html: `<h1>Your OTP is ${otp}</h1>`,
-    });
-
-    if (error) {
-      console.error("EMAIL SEND FAILED:", error);
-      await ensureMinimumLatency(startedAt);
-      return acceptedResponse();
+      return NextResponse.json(
+        { error: "Could not send verification email. Please try again." },
+        { status: 500 },
+      );
     }
 
     await ensureMinimumLatency(startedAt);
-    return acceptedResponse();
+    return NextResponse.json(
+      { success: true, message: "A new verification code has been sent to your email." },
+      { status: 200 },
+    );
   } catch (err) {
     console.error("Resend OTP error:", err);
     await ensureMinimumLatency(startedAt);
-    return acceptedResponse();
+    return NextResponse.json(
+      { error: "Unable to process request" },
+      { status: 500 },
+    );
   }
 }

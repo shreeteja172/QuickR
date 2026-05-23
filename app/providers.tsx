@@ -14,20 +14,23 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         toastOptions={{
           duration: 3500,
           style: {
-            borderRadius: "16px",
-            background: "#0f172a",
-            color: "#f8fafc",
+            borderRadius: "8px",
+            background: "#1f1f1f",
+            color: "#ffffff",
             padding: "12px 16px",
-            boxShadow: "0 16px 45px -20px rgba(15, 23, 42, 0.65)",
+            fontSize: "14px",
+            boxShadow: "0 12px 24px -8px rgba(0, 0, 0, 0.25)",
           },
           success: {
             style: {
-              background: "#052e16",
+              background: "#1f1f1f",
+              borderLeft: "3px solid #fa520f",
             },
           },
           error: {
             style: {
-              background: "#450a0a",
+              background: "#1f1f1f",
+              borderLeft: "3px solid #dc2626",
             },
           },
         }}

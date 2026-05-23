@@ -94,7 +94,6 @@ export default function SignInPage() {
         callbackURL: "/dashboard",
       });
 
-      // Redirect after successful login
       router.replace("/dashboard");
     } catch (error) {
       setAuthError(
@@ -113,7 +112,6 @@ export default function SignInPage() {
     setActiveAction("google");
 
     try {
-      // Don't await - OAuth redirect should happen immediately
       signInWithGoogle("/dashboard");
     } catch (error) {
       setAuthError(
@@ -129,70 +127,72 @@ export default function SignInPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-slate-50 px-4 pt-20 pb-8 text-slate-950 sm:px-6 sm:pt-24 sm:pb-12 lg:pt-28">
-        <div className="mx-auto min-h-[calc(100vh-4rem)] w-full max-w-6xl">
+      <main className="min-h-screen bg-cream-light px-4 pt-20 pb-0 text-ink sm:px-6 sm:pt-24 lg:pt-28">
+        <div className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="p-6 sm:p-12">
-              <div className="rounded-2xl overflow-hidden bg-linear-to-br from-slate-800 via-cyan-700 to-emerald-500 text-white p-8 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-white/10">
-                    <span className="font-bold">QR</span>
+              <div className="relative overflow-hidden rounded-lg bg-ink p-10">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/10 blur-[80px]" />
+                <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-700/10 blur-[80px]" />
+                <div className="relative">
+                  <div className="flex items-center gap-4">
+                    <div className="h-12 w-12 flex items-center justify-center rounded-md bg-primary">
+                      <span className="font-bold text-on-primary">QR</span>
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[1px] text-on-dark-muted">
+                        Welcome back
+                      </p>
+                      <h3 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl leading-tight text-on-dark">
+                        Sign in to your workspace
+                      </h3>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em]">
-                      Welcome back
-                    </p>
-                    <h3 className="mt-1 text-2xl font-extrabold leading-tight">
-                      Sign in to your workspace
-                    </h3>
-                  </div>
+
+                  <p className="mt-4 text-sm leading-[1.55] text-on-dark-muted max-w-md">
+                    Access your saved QR codes, edit destinations, and download
+                    high-res exports. Your workspace stays in sync across devices.
+                  </p>
+
+                  <ul className="mt-6 space-y-4">
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1 h-3 w-3 rounded-full bg-primary" />
+                      <div>
+                        <p className="text-sm font-medium text-on-dark">Secure sessions</p>
+                        <p className="text-xs text-on-dark-muted">
+                          Protected by industry-standard auth.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1 h-3 w-3 rounded-full bg-sunshine-500" />
+                      <div>
+                        <p className="text-sm font-medium text-on-dark">Sync history</p>
+                        <p className="text-xs text-on-dark-muted">
+                          All your codes in one place.
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-
-                <p className="mt-4 text-sm leading-6 text-white/90 max-w-md">
-                  Access your saved QR codes, edit destinations, and download
-                  high-res exports. Your workspace stays in sync across devices.
-                </p>
-
-                <ul className="mt-6 space-y-4">
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 h-3 w-3 rounded-full bg-white/90" />
-                    <div>
-                      <p className="text-sm font-semibold">Secure sessions</p>
-                      <p className="text-xs text-white/80">
-                        Protected by industry-standard auth.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 h-3 w-3 rounded-full bg-white/90" />
-                    <div>
-                      <p className="text-sm font-semibold">Sync history</p>
-                      <p className="text-xs text-white/80">
-                        All your codes in one place.
-                      </p>
-                    </div>
-                  </li>
-                </ul>
               </div>
             </div>
 
             <div className="order-2 lg:order-2 flex items-center justify-center p-6">
-              <section className="w-full max-w-md rounded-3xl border border-slate-100 bg-white p-6 shadow-xl sm:p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-xs font-semibold tracking-[0.12em] text-slate-400 uppercase">
-                      Sign in
-                    </p>
-                    <h4 className="mt-1 text-xl font-semibold text-slate-900">
-                      Welcome back — enter your details
-                    </h4>
-                  </div>
+              <section className="w-full max-w-md rounded-lg border border-beige-deep bg-cream p-8">
+                <div className="mb-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
+                    Sign in
+                  </p>
+                  <h4 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl tracking-[-0.5px] text-ink">
+                    Welcome back — enter your details
+                  </h4>
                 </div>
 
                 <form className="mt-2 space-y-4" onSubmit={handleEmailSignIn}>
                   <div>
                     <label
-                      className="block text-sm font-medium text-slate-700"
+                      className="block text-sm font-medium text-slate"
                       htmlFor="email"
                     >
                       Email
@@ -216,7 +216,7 @@ export default function SignInPage() {
                           ? "email-error"
                           : undefined
                       }
-                      className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                       className="mt-2 w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
                       placeholder="name@company.com"
                       type="email"
                     />
@@ -233,7 +233,7 @@ export default function SignInPage() {
 
                   <div>
                     <label
-                      className="block text-sm font-medium text-slate-700"
+                      className="block text-sm font-medium text-slate"
                       htmlFor="password"
                     >
                       Password
@@ -258,7 +258,7 @@ export default function SignInPage() {
                           ? "password-error"
                           : undefined
                       }
-                      className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                       className="mt-2 w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
                       placeholder="At least 8 characters"
                       type="password"
                     />
@@ -275,7 +275,7 @@ export default function SignInPage() {
 
                   {authError && (
                     <p
-                      className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                      className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
                       role="alert"
                     >
                       {authError}
@@ -286,18 +286,18 @@ export default function SignInPage() {
                     type="submit"
                     disabled={!canSubmit || signInMutation.isPending}
                     aria-busy={signInMutation.isPending}
-                    className="w-full inline-flex items-center justify-center rounded-xl bg-slate-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-medium text-on-primary transition hover:bg-primary-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {signInMutation.isPending ? "Signing in..." : "Continue"}
                   </button>
                 </form>
 
                 <div className="my-6 flex items-center gap-4">
-                  <div className="h-px flex-1 bg-slate-200" />
-                  <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                  <div className="h-px flex-1 bg-hairline" />
+                  <span className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
                     Or continue with
                   </span>
-                  <div className="h-px flex-1 bg-slate-200" />
+                  <div className="h-px flex-1 bg-hairline" />
                 </div>
 
                 <button
@@ -305,7 +305,7 @@ export default function SignInPage() {
                   onClick={handleGoogleSignIn}
                   disabled={isSubmitting}
                   aria-busy={isSubmitting && activeAction === "google"}
-                  className="w-full inline-flex items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full inline-flex items-center justify-center gap-3 rounded-md border border-hairline-strong bg-canvas px-4 py-3 text-sm font-medium text-ink transition hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <svg
                     aria-hidden="true"
@@ -322,11 +322,11 @@ export default function SignInPage() {
                     : "Continue with Google"}
                 </button>
 
-                <p className="mt-6 text-center text-sm text-slate-500">
+                <p className="mt-6 text-center text-sm text-stone">
                   Don&apos;t have an account?{" "}
                   <Link
                     href="/signup"
-                    className="font-medium text-slate-900 hover:underline"
+                    className="font-medium text-primary hover:underline"
                   >
                     Sign up
                   </Link>
@@ -336,6 +336,8 @@ export default function SignInPage() {
           </div>
         </div>
       </main>
+      <div className="h-4 w-full bg-gradient-to-r from-sunshine-700 via-sunshine-500 via-sunshine-300 to-yellow-saturated" />
+      <div className="h-4 w-full bg-gradient-to-r from-yellow-saturated via-cream-deeper to-cream" />
     </>
   );
 }

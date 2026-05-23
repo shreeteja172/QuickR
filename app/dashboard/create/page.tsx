@@ -65,7 +65,7 @@ export default function Page() {
   };
 
   return (
-    <main className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <main className="relative mx-auto max-w-[1280px] px-8 py-12 sm:px-10 lg:px-12 lg:py-16">
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">
         <div>
           <QRHeader />
@@ -83,31 +83,31 @@ export default function Page() {
           <QRPreview qr={qr} text={text} />
           <QRStats />
 
-          <div className="rounded-4xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-34px_rgba(15,23,42,0.3)] sm:p-8">
+          <div className="rounded-lg border border-hairline-soft bg-canvas p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-semibold text-slate-950">
+                <h2 className="text-lg font-medium text-ink">
                   Recent Generations
                 </h2>
-                <p className="mt-1 text-sm text-slate-500">
+                <p className="mt-1 text-sm text-stone">
                   Codes stay available for quick follow-up.
                 </p>
               </div>
-              <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
+              <span className="rounded-full bg-cream-deeper px-3 py-1 text-[11px] font-semibold text-ink">
                 {result.length} item{result.length === 1 ? "" : "s"}
               </span>
             </div>
 
             <div className="mt-6 space-y-3">
               {result.length === 0 ? (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-8 text-center text-sm text-slate-500">
+                <div className="rounded-md border border-hairline-soft bg-surface px-4 py-8 text-center text-sm text-stone">
                   Nothing saved yet. Generate a QR code to see it here.
                 </div>
               ) : (
                 result.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4"
+                    className="flex items-center gap-4 rounded-md border border-hairline-soft bg-surface px-4 py-4"
                   >
                     <Image
                       src={item.image}
@@ -115,13 +115,13 @@ export default function Page() {
                       width={84}
                       height={84}
                       unoptimized
-                      className="rounded-2xl border border-slate-200 bg-white shadow-sm"
+                      className="rounded-md border border-hairline-soft bg-canvas"
                     />
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-slate-900">
+                      <p className="truncate text-sm font-medium text-ink">
                         {item.data}
                       </p>
-                      <p className="mt-1 text-xs text-slate-500">
+                      <p className="mt-1 text-xs text-stone">
                         /dashboard/qr/{item.id}
                       </p>
                     </div>
