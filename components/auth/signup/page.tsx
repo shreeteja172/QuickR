@@ -105,8 +105,7 @@ export default function SignUpPage() {
         callbackURL: "/dashboard",
       });
 
-      localStorage.setItem("signup_email", email.trim());
-      router.replace(`/verify-otp?email=${encodeURIComponent(email.trim())}`);
+      router.replace("/dashboard");
     } catch (error) {
       setAuthError(
         error instanceof Error && error.message
