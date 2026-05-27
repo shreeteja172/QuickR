@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useSession, signOut } from "@/lib/auth-client";
 import { useRouter, usePathname } from "next/navigation";
@@ -25,9 +26,12 @@ export default function Header() {
           href={session ? "/dashboard" : "/"}
           className="flex items-center gap-3"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink text-xs font-semibold text-on-dark">
-            QR
-          </span>
+          <Image
+            src="/logo.png"
+            alt="QuickR"
+            width={48}
+            height={48}
+          />
           <span className="hidden sm:block">
             <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-steel leading-none">
               QuickR

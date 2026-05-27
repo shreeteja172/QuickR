@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -147,9 +148,12 @@ export default function SignUpPage() {
                 <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-500/15 blur-[80px]" />
                 <div className="relative">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 flex items-center justify-center rounded-md bg-ink">
-                      <span className="font-bold text-on-dark">QR</span>
-                    </div>
+                    <Image
+                      src="/logo.png"
+                      alt="QuickR"
+                      width={72}
+                      height={72}
+                    />
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[1px] text-ink/70">
                         QuickR

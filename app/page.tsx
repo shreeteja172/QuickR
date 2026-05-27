@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/layout/Header";
 
 import { currentSession } from "@/lib/current-session";
@@ -384,9 +385,12 @@ export default async function Page() {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-md bg-ink text-xs font-semibold text-on-dark">
-                  QR
-                </span>
+                <Image
+                  src="/logo.png"
+                  alt="QuickR"
+                  width={52}
+                  height={52}
+                />
                 <span className="text-ink font-medium tracking-wide text-lg">
                   QuickR
                 </span>

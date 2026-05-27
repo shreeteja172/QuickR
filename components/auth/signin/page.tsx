@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -131,44 +132,47 @@ export default function SignInPage() {
         <div className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="p-6 sm:p-12">
-              <div className="relative overflow-hidden rounded-lg bg-ink p-10">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/10 blur-[80px]" />
-                <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-700/10 blur-[80px]" />
+              <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-sunshine-300 via-sunshine-500 to-sunshine-700 p-10">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-sunshine-300/30 blur-[80px]" />
+                <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-500/15 blur-[80px]" />
                 <div className="relative">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 flex items-center justify-center rounded-md bg-primary">
-                      <span className="font-bold text-on-primary">QR</span>
-                    </div>
+                    <Image
+                      src="/logo.png"
+                      alt="QuickR"
+                      width={72}
+                      height={72}
+                    />
                     <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[1px] text-on-dark-muted">
+                      <p className="text-[11px] font-semibold uppercase tracking-[1px] text-ink/70">
                         Welcome back
                       </p>
-                      <h3 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl leading-tight text-on-dark">
+                      <h3 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl leading-tight text-ink">
                         Sign in to your workspace
                       </h3>
                     </div>
                   </div>
 
-                  <p className="mt-4 text-sm leading-[1.55] text-on-dark-muted max-w-md">
+                  <p className="mt-4 text-sm leading-[1.55] text-ink/80 max-w-md">
                     Access your saved QR codes, edit destinations, and download
                     high-res exports. Your workspace stays in sync across devices.
                   </p>
 
                   <ul className="mt-6 space-y-4">
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-3 w-3 rounded-full bg-primary" />
+                      <div className="mt-1 h-3 w-3 rounded-full bg-ink" />
                       <div>
-                        <p className="text-sm font-medium text-on-dark">Secure sessions</p>
-                        <p className="text-xs text-on-dark-muted">
+                        <p className="text-sm font-medium">Secure sessions</p>
+                        <p className="text-xs text-ink/70">
                           Protected by industry-standard auth.
                         </p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-3 w-3 rounded-full bg-sunshine-500" />
+                      <div className="mt-1 h-3 w-3 rounded-full bg-ink" />
                       <div>
-                        <p className="text-sm font-medium text-on-dark">Sync history</p>
-                        <p className="text-xs text-on-dark-muted">
+                        <p className="text-sm font-medium">Sync history</p>
+                        <p className="text-xs text-ink/70">
                           All your codes in one place.
                         </p>
                       </div>

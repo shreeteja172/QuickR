@@ -1,6 +1,27 @@
 import Link from "next/link";
+import { currentSession } from "@/lib/current-session";
+import prisma from "@/lib/db";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const session = await currentSession();
+  const email = session?.user?.email;
+
+  let qrCount = 0;
+  let isPro = false;
+
+  if (email) {
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: { id: true, isPro: true },
+    });
+    if (user) {
+      isPro = user.isPro;
+      qrCount = await prisma.qRCode.count({
+        where: { userId: user.id },
+      });
+    }
+  }
+
   return (
     <main className="relative mx-auto max-w-[1280px] px-8 py-12 sm:px-10 lg:px-12 lg:py-16">
       <header className="mb-12 max-w-2xl">
@@ -46,21 +67,36 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            <div className="rounded-lg border border-hairline-soft bg-surface p-10 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-md bg-cream border border-beige-deep">
-                <svg className="h-5 w-5 text-stone" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
+            {qrCount === 0 ? (
+              <div className="rounded-lg border border-hairline-soft bg-surface p-10 text-center">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-md bg-cream border border-beige-deep">
+                  <svg className="h-5 w-5 text-stone" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <h3 className="mt-4 text-sm font-medium text-ink">No QR codes yet</h3>
+                <p className="mt-2 text-sm text-stone">Your generated codes will appear here.</p>
+                <Link
+                  href="/dashboard/create"
+                  className="mt-5 inline-block text-sm font-medium text-primary hover:underline transition"
+                >
+                  Create your first code &rarr;
+                </Link>
               </div>
-              <h3 className="mt-4 text-sm font-medium text-ink">No QR codes yet</h3>
-              <p className="mt-2 text-sm text-stone">Your generated codes will appear here.</p>
+            ) : (
               <Link
-                href="/dashboard/create"
-                className="mt-5 inline-block text-sm font-medium text-primary hover:underline transition"
+                href="/dashboard/qr"
+                className="block rounded-lg border border-hairline-soft bg-surface p-6 text-center transition hover:border-hairline-strong hover:bg-cream"
               >
-                Create your first code &rarr;
+                <p className="text-2xl font-medium text-ink">{qrCount}</p>
+                <p className="mt-1 text-sm text-stone">
+                  QR code{qrCount === 1 ? "" : "s"} generated
+                </p>
+                <p className="mt-3 text-sm font-medium text-primary">
+                  View all history &rarr;
+                </p>
               </Link>
-            </div>
+            )}
           </section>
         </div>
 
@@ -105,12 +141,12 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between rounded-md border border-hairline-soft bg-canvas p-4">
                 <span className="text-sm font-medium text-slate">Plan</span>
                 <span className="rounded-full bg-cream-deeper px-3 py-1 text-[11px] font-semibold text-ink">
-                  Free Tier
+                  {isPro ? "Pro" : "Free Tier"}
                 </span>
               </div>
               <div className="flex items-center justify-between rounded-md border border-hairline-soft bg-canvas p-4">
                 <span className="text-sm font-medium text-slate">Codes Generated</span>
-                <span className="text-sm font-medium text-ink">0</span>
+                <span className="text-sm font-medium text-ink">{qrCount}</span>
               </div>
             </div>
           </div>

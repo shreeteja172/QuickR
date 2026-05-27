@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
+import { Inter, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import Providers from "./providers";
@@ -9,10 +9,9 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const dmSerif = DM_Serif_Display({
+const bricolage = Bricolage_Grotesque({
   variable: "--font-dm-serif",
   subsets: ["latin"],
-  weight: "400",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -34,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${bricolage.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream-light text-ink">
         <Providers>{children}</Providers>
