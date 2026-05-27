@@ -135,3 +135,51 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  _req: Request,
+  context: { params: Promise<{ id: string }> },
+) {
+  const { id } = await context.params;
+
+  if (!id) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
+  const session = await currentSession();
+  const email = session?.user?.email;
+  if (!email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { id: true },
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  const existingQr = await prisma.qRCode.findFirst({
+    where: {
+      id,
+      userId: user.id,
+    },
+    select: { id: true },
+  });
+
+  if (!existingQr) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  try {
+    await prisma.qRCode.delete({ where: { id } });
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to delete QR code" },
+      { status: 500 },
+    );
+  }
+}
