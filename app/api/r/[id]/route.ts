@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 function normalizeDestinationUrl(input: string): string | null {
   const trimmed = input.trim();
   if (!trimmed) return null;
@@ -56,5 +58,5 @@ export async function GET(
     );
   }
 
-  return NextResponse.redirect(destinationUrl);
+  return NextResponse.redirect(destinationUrl, 302);
 }

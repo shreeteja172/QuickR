@@ -139,13 +139,13 @@ export default function SignUpPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-cream-light px-4 pt-20 pb-0 text-ink sm:px-6 sm:pt-24 lg:pt-28">
+      <main id="main-content" className="min-h-screen bg-cream-light px-4 pt-20 pb-0 text-ink sm:px-6 sm:pt-24 lg:pt-28">
         <div className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="p-6 sm:p-12">
               <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-sunshine-300 via-sunshine-500 to-sunshine-700 p-10">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-sunshine-300/30 blur-[80px]" />
-                <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-500/15 blur-[80px]" />
+                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-sunshine-300/30 blur-[80px]" aria-hidden="true" />
+                <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-500/15 blur-[80px]" aria-hidden="true" />
                 <div className="relative">
                   <div className="flex items-center gap-4">
                     <Image
@@ -171,7 +171,7 @@ export default function SignUpPage() {
 
                   <ul className="mt-6 space-y-4">
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-3 w-3 rounded-full bg-ink" />
+                       <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
                         <p className="text-sm font-medium">Fast generation</p>
                         <p className="text-xs text-ink/70">
@@ -180,7 +180,7 @@ export default function SignUpPage() {
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-3 w-3 rounded-full bg-ink" />
+                       <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
                         <p className="text-sm font-medium">Save & organize</p>
                         <p className="text-xs text-ink/70">
@@ -189,7 +189,7 @@ export default function SignUpPage() {
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="mt-1 h-3 w-3 rounded-full bg-ink" />
+                       <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
                         <p className="text-sm font-medium">
                           High-res exports
@@ -404,8 +404,8 @@ export default function SignUpPage() {
           </div>
         </div>
       </main>
-      <div className="h-4 w-full bg-gradient-to-r from-sunshine-700 via-sunshine-500 via-sunshine-300 to-yellow-saturated" />
-      <div className="h-4 w-full bg-gradient-to-r from-yellow-saturated via-cream-deeper to-cream" />
+      <div className="h-4 w-full bg-gradient-to-r from-sunshine-700 via-sunshine-500 via-sunshine-300 to-yellow-saturated" aria-hidden="true" />
+      <div className="h-4 w-full bg-gradient-to-r from-yellow-saturated via-cream-deeper to-cream" aria-hidden="true" />
     </>
   );
 }

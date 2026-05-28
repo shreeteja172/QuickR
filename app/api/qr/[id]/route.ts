@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { currentSession } from "@/lib/current-session";
 
+export const dynamic = "force-dynamic";
+
 function normalizeDestinationUrl(input: string): string | null {
   const trimmed = input.trim();
   if (!trimmed) return null;

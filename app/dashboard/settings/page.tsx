@@ -87,6 +87,13 @@ export default function SettingsPage() {
 
   return (
     <main className="relative mx-auto max-w-[1280px] px-8 py-6 sm:px-10 lg:px-12 lg:py-8">
+      <nav aria-label="Breadcrumb" className="mb-6">
+        <ol className="flex items-center gap-2 text-sm text-stone">
+          <li><a href="/dashboard" className="hover:text-ink transition">Dashboard</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-ink font-medium">Settings</li>
+        </ol>
+      </nav>
       <header className="mb-10 max-w-2xl">
         <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
           Preferences

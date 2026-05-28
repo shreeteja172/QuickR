@@ -12,7 +12,7 @@ export default function QRPreview({ qr, text }: Props) {
         <div className="flex justify-center rounded-md bg-surface p-4">
           <Image
             src={qr}
-            alt="QR"
+            alt={text ? `QR code for ${text}` : "Generated QR code"}
             width={300}
             height={300}
             unoptimized

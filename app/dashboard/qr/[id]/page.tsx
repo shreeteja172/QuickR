@@ -198,13 +198,22 @@ export default function QRDetail() {
 
   return (
     <main className="relative mx-auto max-w-[1280px] px-8 py-12 sm:px-10 lg:px-12 lg:py-16">
-      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
+      <nav aria-label="Breadcrumb" className="mb-6">
+        <ol className="flex items-center gap-2 text-sm text-stone">
+          <li><Link href="/dashboard" className="hover:text-ink transition">Dashboard</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link href="/dashboard/qr" className="hover:text-ink transition">QR History</Link></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-ink font-medium">{id}</li>
+        </ol>
+      </nav>
+      <section aria-labelledby="qr-detail-heading" className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
         <div className="flex flex-col gap-6">
           <div className="rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
             <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
               QR Detail
             </p>
-            <h1 className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]">
+            <h1 id="qr-detail-heading" className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]">
               Update and inspect
             </h1>
             <p className="mt-3 text-sm leading-[1.55] text-slate max-w-xl">
