@@ -140,9 +140,9 @@ export default function SignUpPage() {
     <>
       <Header />
       <main id="main-content" className="min-h-screen bg-cream-light px-4 pt-20 pb-0 text-ink sm:px-6 sm:pt-24 lg:pt-28">
-        <div className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-6xl">
+        <div className="mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-6xl items-center justify-center">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="p-6 sm:p-12">
+            <div className="hidden lg:block p-6 sm:p-12">
               <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-sunshine-300 via-sunshine-500 to-sunshine-700 p-10">
                 <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-sunshine-300/30 blur-[80px]" aria-hidden="true" />
                 <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-sunshine-500/15 blur-[80px]" aria-hidden="true" />
@@ -204,8 +204,8 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center p-6">
-              <section className="w-full max-w-md rounded-lg border border-beige-deep bg-cream p-8">
+            <div className="flex items-center justify-center p-4 sm:p-6">
+              <section className="w-full max-w-md rounded-lg border border-beige-deep bg-cream p-6 sm:p-8">
                 <div className="mb-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
                     Create account
@@ -215,7 +215,7 @@ export default function SignUpPage() {
                   </h4>
                 </div>
 
-                <form className="mt-2 space-y-4" onSubmit={handleEmailSignup}>
+                {/* <form className="mt-2 space-y-4" onSubmit={handleEmailSignup}>
                   <div>
                     <label
                       className="block text-sm font-medium text-slate"
@@ -282,9 +282,9 @@ export default function SignUpPage() {
                           ? "email-error"
                           : undefined
                       }
-                       className="mt-2 w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
-                      placeholder="name@company.com"
-                      type="email"
+                        className="mt-2 w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
+                       placeholder="name@company.com"
+                       type="email"
                     />
                     {fieldTouched.email && errors.email && (
                       <p
@@ -324,9 +324,9 @@ export default function SignUpPage() {
                           ? "password-error"
                           : undefined
                       }
-                       className="mt-2 w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
-                      placeholder="At least 8 characters"
-                      type="password"
+                        className="mt-2 w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
+                       placeholder="At least 8 characters"
+                       type="password"
                     />
                     {fieldTouched.password && errors.password && (
                       <p
@@ -366,7 +366,9 @@ export default function SignUpPage() {
                     </span>
                     <div className="h-px flex-1 bg-hairline" />
                   </div>
+                </form> */}
 
+                <div className="mt-6">
                   <button
                     type="button"
                     onClick={handleGoogleSignup}
@@ -387,18 +389,18 @@ export default function SignUpPage() {
                     {isSubmitting && activeAction === "google"
                       ? "Continuing..."
                       : "Continue with Google"}
-                  </button>
+                   </button>
+                </div>
 
-                  <p className="text-center text-sm text-stone">
-                    Already have an account?{" "}
-                    <Link
-                      href="/signin"
-                      className="font-medium text-primary hover:underline"
-                    >
-                      Sign in
-                    </Link>
-                  </p>
-                </form>
+                <p className="mt-6 text-center text-sm text-stone">
+                  Already have an account?{" "}
+                  <Link
+                    href="/signin"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    Sign in
+                  </Link>
+                </p>
               </section>
             </div>
           </div>
