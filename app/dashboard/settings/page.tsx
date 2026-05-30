@@ -87,13 +87,6 @@ export default function SettingsPage() {
 
   return (
     <main className="relative mx-auto max-w-[1280px] px-8 py-6 sm:px-10 lg:px-12 lg:py-8">
-      <nav aria-label="Breadcrumb" className="mb-6">
-        <ol className="flex items-center gap-2 text-sm text-stone">
-          <li><a href="/dashboard" className="hover:text-ink transition">Dashboard</a></li>
-          <li aria-hidden="true">/</li>
-          <li aria-current="page" className="text-ink font-medium">Settings</li>
-        </ol>
-      </nav>
       <header className="mb-10 max-w-2xl">
         <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
           Preferences
@@ -109,25 +102,21 @@ export default function SettingsPage() {
 
       <div className="space-y-8">
         <section className="rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
-          <h2 className="text-lg font-medium text-ink">
-            Profile Details
-          </h2>
+          <h2 className="text-lg font-medium text-ink">Profile Details</h2>
           <p className="mt-1 text-sm text-stone">
             This is how we identify you in the QuickR platform.
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-ink">
-                Name
-              </label>
+              <label className="block text-sm font-medium text-ink">Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={isPending || saving}
                 placeholder="Your name"
-                 className="w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
+                className="w-full h-11 rounded-md border border-hairline-strong bg-canvas px-4 text-sm text-ink outline-none transition placeholder:text-stone focus:border-primary focus:ring-2 focus:ring-primary/10"
               />
             </div>
 
@@ -187,9 +176,7 @@ export default function SettingsPage() {
 
           <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between rounded-md border border-red-100 bg-red-50 p-5">
             <div>
-              <p className="text-sm font-medium text-ink">
-                Delete Account
-              </p>
+              <p className="text-sm font-medium text-ink">Delete Account</p>
               <p className="mt-1 text-xs text-stone">
                 Permanently remove your account and all associated QR codes.
               </p>

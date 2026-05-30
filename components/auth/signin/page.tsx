@@ -148,32 +148,31 @@ export default function SignInPage() {
                         Welcome back
                       </p>
                       <h3 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl leading-tight text-ink">
-                        Sign in to your workspace
+                        Pick up where you left off
                       </h3>
                     </div>
                   </div>
 
                   <p className="mt-4 text-sm leading-[1.55] text-ink/80 max-w-md">
-                    Access your saved QR codes, edit destinations, and download
-                    high-res exports. Your workspace stays in sync across devices.
+                    Your QR codes, your history, your exports. All synced and ready the second you sign in.
                   </p>
 
                   <ul className="mt-6 space-y-4">
                     <li className="flex items-start gap-3">
                        <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
-                        <p className="text-sm font-medium">Secure sessions</p>
+                         <p className="text-sm font-medium">Secure sessions</p>
                         <p className="text-xs text-ink/70">
-                          Protected by industry-standard auth.
+                          Industry-standard auth keeps your data locked.
                         </p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                        <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
-                        <p className="text-sm font-medium">Sync history</p>
+                         <p className="text-sm font-medium">Synced everywhere</p>
                         <p className="text-xs text-ink/70">
-                          All your codes in one place.
+                          Every code, every update, every device.
                         </p>
                       </div>
                     </li>
@@ -189,7 +188,7 @@ export default function SignInPage() {
                     Sign in
                   </p>
                   <h4 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl tracking-[-0.5px] text-ink">
-                    Welcome back — Continue where you left 
+                    Welcome back
                   </h4>
                 </div>
 

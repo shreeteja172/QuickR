@@ -24,13 +24,6 @@ const Page = () => {
 
   return (
     <main className="relative mx-auto max-w-[1280px] px-8 py-6 sm:px-10 lg:px-12 lg:py-8">
-      <nav aria-label="Breadcrumb" className="mb-6">
-        <ol className="flex items-center gap-2 text-sm text-stone">
-          <li><a href="/dashboard" className="hover:text-ink transition">Dashboard</a></li>
-          <li aria-hidden="true">/</li>
-          <li aria-current="page" className="text-ink font-medium">QR History</li>
-        </ol>
-      </nav>
       <section aria-labelledby="qr-history-heading" className="relative w-full">
         <div className="rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
           <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
@@ -38,7 +31,10 @@ const Page = () => {
               <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
                 Saved QR codes
               </p>
-              <h1 id="qr-history-heading" className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]">
+              <h1
+                id="qr-history-heading"
+                className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]"
+              >
                 Browse your generated QR history
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-[1.55] text-slate">

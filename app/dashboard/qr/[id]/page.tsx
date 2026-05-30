@@ -113,7 +113,11 @@ export default function QRDetail() {
   };
 
   const deleteQr = async () => {
-    if (!window.confirm("Are you sure you want to delete this QR code? This action cannot be undone.")) {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this QR code? This action cannot be undone.",
+      )
+    ) {
       return;
     }
 
@@ -126,7 +130,9 @@ export default function QRDetail() {
       queryClient.invalidateQueries({ queryKey: ["qr"] });
       router.replace("/dashboard/qr");
     } catch {
-      toast.error("Failed to delete QR code. Please try again.", { id: "delete-qr" });
+      toast.error("Failed to delete QR code. Please try again.", {
+        id: "delete-qr",
+      });
     } finally {
       setDeleting(false);
     }
@@ -163,9 +169,7 @@ export default function QRDetail() {
               />
             </svg>
           </div>
-          <p className="text-xl font-medium text-ink">
-            QR code not found
-          </p>
+          <p className="text-xl font-medium text-ink">QR code not found</p>
           <p className="mt-2 text-sm text-stone max-w-md">
             The QR code you&apos;re looking for doesn&apos;t exist, has been
             deleted, or you don&apos;t have permission to view it.
@@ -198,22 +202,19 @@ export default function QRDetail() {
 
   return (
     <main className="relative mx-auto max-w-[1280px] px-8 py-12 sm:px-10 lg:px-12 lg:py-16">
-      <nav aria-label="Breadcrumb" className="mb-6">
-        <ol className="flex items-center gap-2 text-sm text-stone">
-          <li><Link href="/dashboard" className="hover:text-ink transition">Dashboard</Link></li>
-          <li aria-hidden="true">/</li>
-          <li><Link href="/dashboard/qr" className="hover:text-ink transition">QR History</Link></li>
-          <li aria-hidden="true">/</li>
-          <li aria-current="page" className="text-ink font-medium">{id}</li>
-        </ol>
-      </nav>
-      <section aria-labelledby="qr-detail-heading" className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
+      <section
+        aria-labelledby="qr-detail-heading"
+        className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8"
+      >
         <div className="flex flex-col gap-6">
           <div className="rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
             <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
               QR Detail
             </p>
-            <h1 id="qr-detail-heading" className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]">
+            <h1
+              id="qr-detail-heading"
+              className="font-[family-name:var(--font-dm-serif)] mt-2 text-[40px] tracking-[-0.5px] text-ink leading-[1.10] sm:text-[52px]"
+            >
               Update and inspect
             </h1>
             <p className="mt-3 text-sm leading-[1.55] text-slate max-w-xl">
@@ -352,12 +353,8 @@ export default function QRDetail() {
         <div className="flex flex-col">
           <div className="sticky top-8 space-y-6 rounded-lg border border-hairline-soft bg-canvas p-6 sm:p-8">
             <div className="text-center mb-6">
-              <h3 className="text-lg font-medium text-ink">
-                QR Code Preview
-              </h3>
-              <p className="text-sm text-stone mt-1">
-                Ready to scan and share
-              </p>
+              <h3 className="text-lg font-medium text-ink">QR Code Preview</h3>
+              <p className="text-sm text-stone mt-1">Ready to scan and share</p>
             </div>
 
             <div className="flex justify-center rounded-md bg-surface p-8 border border-hairline-soft relative group overflow-hidden">

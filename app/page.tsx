@@ -24,49 +24,55 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    title: "Dynamic / Updatable QR codes",
+    title: "Dynamic QR codes that never go stale",
     description:
-      "Create QR codes whose destination or payload can be updated later without regenerating the image — great for campaigns and dynamic redirects.",
+      "Change where your QR code points even after it's printed. No regenerating, no reprinting. Just update and go.",
   },
   {
-    title: "Generate from text or links",
+    title: "Links or text, one click",
     description:
-      "Paste content, generate a code, and keep the workflow simple.",
+      "Paste any URL or text, hit generate, done. No accounts needed to try it.",
   },
   {
-    title: "Save QR codes",
-    description: "Store codes in your workspace for later reuse.",
+    title: "Your codes, your workspace",
+    description:
+      "Every QR code you make lives in one place. Revisit, reuse, re-download anytime.",
   },
   {
-    title: "Download PNG",
+    title: "Print-ready PNG downloads",
     description:
-      "Export a clean image that works across print and digital use.",
+      "Export crisp, high-res PNGs built for print, signage, packaging, and presentations.",
   },
   {
-    title: "Open source",
+    title: "Open source, always",
     description:
-      "Fully open-source — contributions and issues welcome on GitHub.",
+      "Fork it, self-host it, ship it. MIT licensed and contributions welcome on GitHub.",
+  },
+  {
+    title: "Shareable workspaces",
+    description:
+      "Invite teammates, share collections, and collaborate on QR codes in one place.",
   },
 ];
 
 const steps = [
   {
     number: "01",
-    title: "Enter content (link, text, or payload)",
+    title: "Drop in your link or text",
     description:
-      "Paste a link, plain text, or set an initial dynamic payload to encode into a QR code.",
+      "Paste a URL, a phone number, or any text you want encoded. That's your starting point.",
   },
   {
     number: "02",
-    title: "Generate & enable dynamic",
+    title: "Hit generate",
     description:
-      "Create a preview instantly and optionally enable dynamic updates so the QR destination can change later.",
+      "Instant preview. Toggle dynamic mode if you want to change the destination later. Your call.",
   },
   {
     number: "03",
-    title: "Save, update, or download",
+    title: "Save, update, download",
     description:
-      "Save to your workspace, update the destination anytime, or export a clean PNG for print.",
+      "Stash it in your workspace, update the target URL anytime, or grab a high-res PNG right now.",
   },
 ];
 
@@ -74,21 +80,22 @@ const useCases = [
   {
     title: "Personal sharing",
     description:
-      "Share a profile, portfolio, or document link quickly — update the destination later without reprinting.",
+      "Share your portfolio, resume, or contact card. Update the link later without reprinting anything.",
   },
   {
-    title: "Events",
+    title: "Events & conferences",
     description:
-      "Send attendees to schedules, forms, or live updates — change links as event details evolve.",
+      "Point attendees to schedules, forms, or live updates. Swap links as the event evolves.",
   },
   {
-    title: "Campaigns",
+    title: "Marketing campaigns",
     description:
-      "Use dynamic QR codes for marketing campaigns so you can swap landing pages without reprinting.",
+      "Run A/B tests on landing pages without changing the QR. Swap destinations on the fly.",
   },
   {
     title: "Quick links",
-    description: "Turn short URLs into reusable codes for everyday use.",
+    description:
+      "Turn short URLs into scannable codes for menus, receipts, and everyday stuff.",
   },
 ];
 
@@ -96,27 +103,32 @@ const faqs = [
   {
     question: "What is a dynamic QR code?",
     answer:
-      "A dynamic QR code encodes a redirect URL rather than the final destination. When scanned, the server looks up the current target and redirects. This means you can update where the QR code points without changing the printed image.",
+      "A dynamic QR code doesn't store the final URL. It stores a redirect. When someone scans it, the server sends them to whatever destination you've set. Change the destination, the QR stays the same. No reprinting needed.",
   },
   {
-    question: "Is QuickR free to use?",
+    question: "Is QuickR free?",
     answer:
-      "Yes, QuickR is completely free and open source. You can generate, save, and download QR codes at no cost. A Pro tier with advanced features may be available in the future.",
+      "100% free and open source. Generate, save, and download as many QR codes as you want. A Pro tier with extra features might come later, but the core will always be free.",
   },
   {
     question: "Can I update a QR code after printing it?",
     answer:
-      "Yes. Dynamic QR codes created with QuickR can have their destination URL updated at any time from your dashboard. The printed QR code image stays the same — only the redirect target changes.",
+      "That's the whole point. Dynamic QR codes let you change the destination URL from your dashboard anytime. The printed image never changes. Only where it sends people does.",
   },
   {
-    question: "What image formats does QuickR support for download?",
+    question: "What format are the downloads?",
     answer:
-      "QuickR exports QR codes as high-resolution PNG files, optimized for both print and digital use. Downloads are available in 4K resolution for print-quality output.",
+      "High-resolution PNG, up to 4K. Optimized for print, packaging, presentations, and anything else you need to put a QR code on.",
   },
   {
-    question: "Is QuickR open source?",
+    question: "Is it really open source?",
     answer:
-      "Yes, QuickR is fully open source under the MIT license. You can view the source code, report issues, and contribute on GitHub at github.com/shreeteja172/quickr.",
+      "Yes, MIT licensed. Check the code, open issues, send PRs. github.com/shreeteja172/quickr.",
+  },
+  {
+    question: "Can I share QR codes with a team?",
+    answer:
+      "You can export and share QR images or links. Collaborative workspace features (team invites and permissions) are planned for future releases.",
   },
 ];
 
@@ -206,7 +218,10 @@ export default async function Page() {
       >
         Skip to main content
       </a>
-      <main id="main-content" className="min-h-screen bg-cream-light text-ink overflow-hidden">
+      <main
+        id="main-content"
+        className="min-h-screen bg-cream-light text-ink overflow-hidden"
+      >
         <div className="relative bg-gradient-to-br from-sunshine-300 via-sunshine-500 to-sunshine-700 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-cream-light/40 via-transparent to-transparent" />
           <div className="pointer-events-none absolute left-[-20%] top-[-30%] h-[800px] w-[800px] rounded-full bg-sunshine-300/30 blur-[120px]" />
@@ -215,18 +230,24 @@ export default async function Page() {
           <div className="relative mx-auto max-w-[1280px] px-8 pt-6 pb-0 sm:px-10 lg:px-12">
             <Header />
 
-            <section aria-labelledby="hero-heading" className="grid grid-cols-1 gap-12 pb-24 pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pb-32 lg:pt-28 items-center">
+            <section
+              aria-labelledby="hero-heading"
+              className="grid grid-cols-1 gap-12 pb-24 pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pb-32 lg:pt-28 items-center"
+            >
               <div>
-                <h1 id="hero-heading" className="font-[family-name:var(--font-dm-serif)] max-w-3xl text-[40px] leading-[1.05] tracking-[-1.5px] text-ink sm:text-[52px] md:text-[64px] lg:text-[84px]">
-                  Generate{" "}
-                  <span className="text-ink-tint">QR codes</span>{" "}
-                  without friction
+                <h1
+                  id="hero-heading"
+                  className="font-[family-name:var(--font-dm-serif)] max-w-3xl text-[40px] leading-[1.05] tracking-[-1.5px] text-ink sm:text-[52px] md:text-[64px] lg:text-[84px]"
+                >
+                  Create live
+                  <span className="text-ink-tint"> QR codes</span> : change
+                  destinations anytime.
                 </h1>
 
                 <p className="mt-8 max-w-xl text-[18px] leading-[1.50] text-ink-tint sm:text-lg">
-                  Create QR codes from links, plain text, or dynamic content you
-                  can update later — save them in your workspace and download a
-                  clean PNG when needed. Fast, flexible, and elegant.
+                  Drop in a link, get a QR code. Update the destination after
+                  printing. Download a crisp PNG. No bloat, no signup wall, no
+                  friction.
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
@@ -245,14 +266,17 @@ export default async function Page() {
                 </div>
               </div>
 
-              <aside aria-label="Product preview" className="rounded-lg border border-hairline-soft/50 bg-canvas/90 backdrop-blur-sm p-8 shadow-[rgba(0,0,0,0.08)_0px_12px_24px_-4px] lg:p-10">
+              <aside
+                aria-label="Product preview"
+                className="rounded-lg border border-hairline-soft/50 bg-canvas/90 backdrop-blur-sm p-8 shadow-[rgba(0,0,0,0.08)_0px_12px_24px_-4px] lg:p-10"
+              >
                 <div className="flex items-center justify-between gap-3 border-b border-hairline pb-5">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[1px] text-stone">
                       Product preview
                     </p>
                     <h2 className="mt-1 text-xl font-medium text-ink">
-                      QR generator
+                      Your next QR code
                     </h2>
                   </div>
                 </div>
@@ -278,7 +302,11 @@ export default async function Page() {
 
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-[1fr_auto]">
                     <div className="rounded-lg border border-hairline-soft bg-canvas p-6">
-                      <div role="img" aria-label="Decorative QR code pattern" className="mx-auto grid aspect-square w-full max-w-64 grid-cols-13 gap-1 rounded-lg bg-surface p-5">
+                      <div
+                        role="img"
+                        aria-label="Decorative QR code pattern"
+                        className="mx-auto grid aspect-square w-full max-w-64 grid-cols-13 gap-1 rounded-lg bg-surface p-5"
+                      >
                         {qrPattern.flatMap((row, rowIndex) =>
                           row.map((cell, cellIndex) => (
                             <span
@@ -286,9 +314,7 @@ export default async function Page() {
                               aria-hidden="true"
                               className={[
                                 "rounded-sm transition-all duration-500",
-                                cell
-                                  ? "bg-ink"
-                                  : "bg-canvas",
+                                cell ? "bg-ink" : "bg-canvas",
                               ].join(" ")}
                               style={{
                                 transitionDelay: `${(rowIndex * 13 + cellIndex) * 2}ms`,
@@ -300,11 +326,17 @@ export default async function Page() {
 
                       <div className="mt-5 flex items-center justify-between gap-3 text-xs font-medium text-stone">
                         <span className="flex items-center gap-1.5">
-                          <div className="h-1.5 w-1.5 rounded-full bg-stone" aria-hidden="true" />{" "}
+                          <div
+                            className="h-1.5 w-1.5 rounded-full bg-stone"
+                            aria-hidden="true"
+                          />{" "}
                           Preview
                         </span>
                         <span className="flex items-center gap-1.5">
-                          <div className="h-1.5 w-1.5 rounded-full bg-sunshine-700" aria-hidden="true" />{" "}
+                          <div
+                            className="h-1.5 w-1.5 rounded-full bg-sunshine-700"
+                            aria-hidden="true"
+                          />{" "}
                           PNG export enabled
                         </span>
                       </div>
@@ -350,17 +382,24 @@ export default async function Page() {
         </div>
 
         <div className="mx-auto max-w-[1280px] px-8 sm:px-10 lg:px-12">
-          <section id="features" aria-labelledby="features-heading" className="py-24 lg:py-32">
+          <section
+            id="features"
+            aria-labelledby="features-heading"
+            className="py-24 lg:py-32"
+          >
             <div className="max-w-3xl">
               <span className="inline-block rounded-full bg-cream-deeper px-3 py-1 text-[11px] font-semibold uppercase tracking-[1px] text-ink">
                 Features
               </span>
-              <h2 id="features-heading" className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-ink sm:text-[52px] lg:text-[64px]">
+              <h2
+                id="features-heading"
+                className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-ink sm:text-[52px] lg:text-[64px]"
+              >
                 Built for a practical workflow
               </h2>
               <p className="mt-5 text-lg leading-[1.55] text-slate">
-                QuickR keeps the interface focused on generation, storage, and
-                download so the product stays fast to use.
+                No feature bloat. Just generate, save, and download. That's the
+                whole product.
               </p>
             </div>
 
@@ -370,7 +409,10 @@ export default async function Page() {
                   key={feature.title}
                   className="rounded-lg border border-hairline-soft bg-canvas p-8 shadow-[rgba(0,0,0,0.04)_0px_4px_12px]"
                 >
-                  <div className="h-1.5 w-12 rounded-full bg-ink mb-6" aria-hidden="true" />
+                  <div
+                    className="h-1.5 w-12 rounded-full bg-ink mb-6"
+                    aria-hidden="true"
+                  />
                   <h3 className="text-xl font-medium text-ink">
                     {feature.title}
                   </h3>
@@ -382,18 +424,25 @@ export default async function Page() {
             </div>
           </section>
 
-          <section id="how-it-works" aria-labelledby="how-it-works-heading" className="py-24 lg:py-32">
+          <section
+            id="how-it-works"
+            aria-labelledby="how-it-works-heading"
+            className="py-24 lg:py-32"
+          >
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <div className="max-w-xl">
                 <span className="inline-block rounded-full bg-cream-deeper px-3 py-1 text-[11px] font-semibold uppercase tracking-[1px] text-ink">
                   How it works
                 </span>
-                <h2 id="how-it-works-heading" className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-ink sm:text-[52px] lg:text-[64px]">
-                  Three steps to perfection
+                <h2
+                  id="how-it-works-heading"
+                  className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-ink sm:text-[52px] lg:text-[64px]"
+                >
+                  Three steps. That's it.
                 </h2>
                 <p className="mt-5 text-lg leading-[1.55] text-slate">
-                  The flow stays short on purpose. Each step maps directly to the
-                  actual action you need to complete, saving you time and clicks.
+                  No onboarding, no setup wizards. Paste, generate, download.
+                  Each step maps to what you actually need to do.
                 </p>
               </div>
 
@@ -403,7 +452,10 @@ export default async function Page() {
                     key={step.number}
                     className="rounded-lg border border-hairline-soft bg-canvas p-8"
                   >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-cream border border-beige-deep text-xl font-medium text-ink" aria-hidden="true">
+                    <span
+                      className="flex h-12 w-12 items-center justify-center rounded-md bg-cream border border-beige-deep text-xl font-medium text-ink"
+                      aria-hidden="true"
+                    >
                       {step.number}
                     </span>
                     <h3 className="mt-6 text-lg font-medium text-ink">
@@ -418,8 +470,15 @@ export default async function Page() {
             </div>
           </section>
 
-          <section id="use-cases" aria-labelledby="use-cases-heading" className="py-24 lg:py-32 relative">
-            <div className="absolute inset-0 -mx-8 sm:-mx-10 lg:-mx-12 bg-gradient-to-br from-ink via-charcoal to-surface-code rounded-none overflow-hidden" aria-hidden="true">
+          <section
+            id="use-cases"
+            aria-labelledby="use-cases-heading"
+            className="py-24 lg:py-32 relative"
+          >
+            <div
+              className="absolute inset-0 -mx-8 sm:-mx-10 lg:-mx-12 bg-gradient-to-br from-ink via-charcoal to-surface-code rounded-none overflow-hidden"
+              aria-hidden="true"
+            >
               <div className="absolute inset-0 bg-gradient-to-br from-sunshine-500/5 via-sunshine-700/8 to-sunshine-300/5" />
               <div className="absolute top-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full bg-sunshine-500/8 blur-[100px]" />
               <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-sunshine-300/8 blur-[100px]" />
@@ -429,8 +488,11 @@ export default async function Page() {
               <span className="inline-block rounded-full border border-hairline-strong/30 bg-charcoal/50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[1px] text-on-dark-muted">
                 Use cases
               </span>
-              <h2 id="use-cases-heading" className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-on-dark sm:text-[52px] lg:text-[64px]">
-                Versatile &amp; ready for anything
+              <h2
+                id="use-cases-heading"
+                className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-on-dark sm:text-[52px] lg:text-[64px]"
+              >
+                Versatile & ready for anything
               </h2>
             </div>
 
@@ -451,12 +513,19 @@ export default async function Page() {
             </div>
           </section>
 
-          <section id="faq" aria-labelledby="faq-heading" className="py-24 lg:py-32">
+          <section
+            id="faq"
+            aria-labelledby="faq-heading"
+            className="py-24 lg:py-32"
+          >
             <div className="max-w-3xl">
               <span className="inline-block rounded-full bg-cream-deeper px-3 py-1 text-[11px] font-semibold uppercase tracking-[1px] text-ink">
                 FAQ
               </span>
-              <h2 id="faq-heading" className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-ink sm:text-[52px] lg:text-[64px]">
+              <h2
+                id="faq-heading"
+                className="font-[family-name:var(--font-dm-serif)] mt-4 text-[40px] leading-[1.10] tracking-[-1px] text-ink sm:text-[52px] lg:text-[64px]"
+              >
                 Frequently asked questions
               </h2>
             </div>
@@ -467,8 +536,12 @@ export default async function Page() {
                   key={faq.question}
                   className="rounded-lg border border-hairline-soft bg-canvas p-8"
                 >
-                  <dt className="text-lg font-medium text-ink">{faq.question}</dt>
-                  <dd className="mt-3 text-sm leading-[1.55] text-slate">{faq.answer}</dd>
+                  <dt className="text-lg font-medium text-ink">
+                    {faq.question}
+                  </dt>
+                  <dd className="mt-3 text-sm leading-[1.55] text-slate">
+                    {faq.answer}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -477,12 +550,15 @@ export default async function Page() {
           <section aria-labelledby="cta-heading" className="py-24 lg:py-32">
             <div className="rounded-lg bg-cream border border-beige-deep p-16 sm:p-20 lg:flex lg:items-center lg:justify-between lg:gap-12">
               <div className="max-w-2xl">
-                <h2 id="cta-heading" className="font-[family-name:var(--font-dm-serif)] text-[40px] leading-[1.15] tracking-[-0.5px] text-ink sm:text-[52px]">
-                  Ready to create your first QR code?
+                <h2
+                  id="cta-heading"
+                  className="font-[family-name:var(--font-dm-serif)] text-[40px] leading-[1.15] tracking-[-0.5px] text-ink sm:text-[52px]"
+                >
+                  Ready to make your first QR code?
                 </h2>
                 <p className="mt-4 text-lg leading-[1.50] text-slate">
                   Join others who generate, update, and manage dynamic QR codes
-                  with QuickR — fully open-source and ready for production.
+                  with QuickR. Free, open source, and ready to ship.
                 </p>
               </div>
 
@@ -496,8 +572,14 @@ export default async function Page() {
           </section>
         </div>
 
-        <div className="h-5 w-full bg-gradient-to-r from-sunshine-700 via-sunshine-500 via-sunshine-300 to-yellow-saturated" aria-hidden="true" />
-        <div className="h-5 w-full bg-gradient-to-r from-yellow-saturated via-cream-deeper to-cream" aria-hidden="true" />
+        <div
+          className="h-5 w-full bg-gradient-to-r from-sunshine-700 via-sunshine-500 via-sunshine-300 to-yellow-saturated"
+          aria-hidden="true"
+        />
+        <div
+          className="h-5 w-full bg-gradient-to-r from-yellow-saturated via-cream-deeper to-cream"
+          aria-hidden="true"
+        />
 
         <footer
           role="contentinfo"
@@ -518,33 +600,49 @@ export default async function Page() {
                   </span>
                 </div>
                 <p className="mt-4 max-w-sm text-sm leading-[1.55] text-slate">
-                  Open-source QR code generator with dynamic updates, workspace management, and high-res exports.
+                  Open-source QR code generator with dynamic updates, workspace
+                  management, and high-res exports.
                 </p>
               </div>
 
-              <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-x-16 gap-y-8 sm:grid-cols-3">
+              <nav
+                aria-label="Footer navigation"
+                className="grid grid-cols-2 gap-x-16 gap-y-8 sm:grid-cols-3"
+              >
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[1px] text-ink">
                     Product
                   </p>
                   <ul className="mt-4 space-y-3">
                     <li>
-                      <a href="#features" className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded">
+                      <a
+                        href="#features"
+                        className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded"
+                      >
                         Features
                       </a>
                     </li>
                     <li>
-                      <a href="#how-it-works" className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded">
+                      <a
+                        href="#how-it-works"
+                        className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded"
+                      >
                         How it works
                       </a>
                     </li>
                     <li>
-                      <a href="#use-cases" className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded">
+                      <a
+                        href="#use-cases"
+                        className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded"
+                      >
                         Use cases
                       </a>
                     </li>
                     <li>
-                      <a href="#faq" className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded">
+                      <a
+                        href="#faq"
+                        className="text-sm text-ink hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded"
+                      >
                         FAQ
                       </a>
                     </li>
@@ -594,7 +692,7 @@ export default async function Page() {
 
             <div className="mt-12 border-t border-beige-deep pt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs text-stone">
-                Open source — contributions, issues, and pull requests welcome.
+                Open source. Contributions, issues, and pull requests welcome.
               </p>
               <div className="flex items-center gap-4">
                 <a
@@ -603,7 +701,12 @@ export default async function Page() {
                   aria-label="QuickR on GitHub"
                   rel="noopener noreferrer"
                 >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <svg
+                    className="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
                     <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.41 7.86 10.94.57.1.78-.25.78-.55 0-.27-.01-1-.01-1.96-3.2.7-3.88-1.54-3.88-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.75.4-1.25.72-1.54-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 012.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.77.11 3.06.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.28 5.68.41.35.77 1.04.77 2.1 0 1.51-.01 2.73-.01 3.1 0 .3.21.66.79.55A11.52 11.52 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                   </svg>
                 </a>

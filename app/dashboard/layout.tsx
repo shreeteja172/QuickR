@@ -4,7 +4,7 @@ import Header from "@/components/layout/Header";
 export const metadata: Metadata = {
   title: "Dashboard",
   description:
-    "Manage your QR code workspace — create, update, and download dynamic QR codes.",
+    "Manage your QR code workspace. Create, update, and download dynamic QR codes.",
   robots: { index: false, follow: true },
 };
 

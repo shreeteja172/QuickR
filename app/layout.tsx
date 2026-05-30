@@ -126,7 +126,8 @@ function WebsiteJsonLd() {
       "Generate, manage, and update dynamic QR codes without friction.",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://quickr-fast.vercel.app/dashboard/create?q={search_term_string}",
+      target:
+        "https://quickr-fast.vercel.app/dashboard/create?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -181,11 +182,21 @@ export default function RootLayout({
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <script
             defer
-            src={process.env.NEXT_PUBLIC_UMAMI_SRC || "https://cloud.umami.is/script.js"}
+            src={
+              process.env.NEXT_PUBLIC_UMAMI_SRC ||
+              "https://cloud.umami.is/script.js"
+            }
             data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
           />
         )}

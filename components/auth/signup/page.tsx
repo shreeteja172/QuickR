@@ -59,7 +59,7 @@ export default function SignUpPage() {
       callbackURL?: string;
     }) => signUpWithEmail(input),
     onSuccess() {
-      toast.success("Account created — check your email for a verification code");
+      toast.success("Account created! Check your email for a verification code");
     },
     onError(err: Error) {
       const message = err.message || String(err);
@@ -159,43 +159,42 @@ export default function SignUpPage() {
                         QuickR
                       </p>
                       <h3 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl leading-tight text-ink">
-                        Create QR codes in seconds
+                        Start making QR codes in seconds
                       </h3>
                     </div>
                   </div>
 
                   <p className="mt-4 text-sm leading-[1.55] text-ink/80 max-w-md">
-                    Save codes, revisit history, and export clean PNGs for print
-                    and web. Built for speed and simplicity.
+                    Save codes, revisit history, and export clean PNGs. Built for speed, simplicity, and people who ship.
                   </p>
 
                   <ul className="mt-6 space-y-4">
                     <li className="flex items-start gap-3">
                        <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
-                        <p className="text-sm font-medium">Fast generation</p>
+                         <p className="text-sm font-medium">Instant generation</p>
                         <p className="text-xs text-ink/70">
-                          Instant preview and export.
+                          Preview and export, no waiting.
                         </p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                        <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
-                        <p className="text-sm font-medium">Save & organize</p>
+                         <p className="text-sm font-medium">Save & organize</p>
                         <p className="text-xs text-ink/70">
-                          Keep your codes in a workspace.
+                          Every code in one workspace.
                         </p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                        <div className="mt-1 h-3 w-3 rounded-full bg-ink" aria-hidden="true" />
                       <div>
-                        <p className="text-sm font-medium">
-                          High-res exports
+                         <p className="text-sm font-medium">
+                          4K PNG exports
                         </p>
                         <p className="text-xs text-ink/70">
-                          PNG optimized for print.
+                          Print-ready, every time.
                         </p>
                       </div>
                     </li>
@@ -211,7 +210,7 @@ export default function SignUpPage() {
                     Create account
                   </p>
                   <h4 className="font-[family-name:var(--font-dm-serif)] mt-1 text-2xl tracking-[-0.5px] text-ink">
-                    Get started — it&apos;s free
+                    Get started, it&apos;s free
                   </h4>
                 </div>
 
