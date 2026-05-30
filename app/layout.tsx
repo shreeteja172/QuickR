@@ -180,6 +180,15 @@ export default function RootLayout({
       className={`${inter.variable} ${bricolage.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+          <script
+            defer
+            src={process.env.NEXT_PUBLIC_UMAMI_SRC || "https://cloud.umami.is/script.js"}
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+          />
+        )}
         <OrganizationJsonLd />
         <WebsiteJsonLd />
         <SoftwareAppJsonLd />
